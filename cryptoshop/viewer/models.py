@@ -23,10 +23,3 @@ class Product(Model):
 	content = TextField()
 	premium = CharField(max_length=100, choices=PREMIUM_CHOICE)
 	price = FloatField(null=True)
-	image = ImageField(upload_to='product', blank=True)
-
-	# Jakub branch
-
-
-# Matt branch
-
