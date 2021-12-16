@@ -18,3 +18,5 @@ class Product(Model):
 	premium = TextField(max_length=100, choices=PREMIUM_CHOICE)
 	price = FloatField(null=True)
 	image = ImageField(upload_to='product', blank=True)
+
+	#sdgsdfgsdfgsdgsfdgsfdg
