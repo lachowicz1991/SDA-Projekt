@@ -10,13 +10,21 @@ class Article(Model):
 	image = ImageField(upload_to='articles', blank=True)
 
 
+class Adverts(Model):
+	title = CharField(max_length=128)
+	image = ImageField(upload_to='articles', blank=True)
+
+
 class Product(Model):
 	PREMIUM_CHOICE = (('Yes', 'Yes'), ('No', 'No'))
 
 	title = CharField()
+	short_description = TextField()
 	content = TextField()
-	premium = TextField(max_length=100, choices=PREMIUM_CHOICE)
+	premium = CharField(max_length=100, choices=PREMIUM_CHOICE)
 	price = FloatField(null=True)
 	image = ImageField(upload_to='product', blank=True)
 
-	#sdgsdfgsdfgsdgsfdgsfdg
+
+# Matt branch
+
