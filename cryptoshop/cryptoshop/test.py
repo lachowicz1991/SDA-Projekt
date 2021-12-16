@@ -1,0 +1,1 @@
+print("Tu jest tekstowy tekst - Tomka")
