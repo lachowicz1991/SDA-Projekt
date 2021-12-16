@@ -7,7 +7,6 @@ class Customer(User):
 	LEVEL = (('Free', 'Free'),('Premium', 'Premium'))
 
 	mobile = CharField(max_length=12)
-	email = EmailField()
 	dob = DateField()
 	basket = ForeignKey
 	subscription = CharField(max_length=20, choices=LEVEL)

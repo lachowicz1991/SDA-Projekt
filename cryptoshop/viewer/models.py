@@ -18,7 +18,7 @@ class Adverts(Model):
 class Product(Model):
 	PREMIUM_CHOICE = (('Yes', 'Yes'), ('No', 'No'))
 
-	title = CharField()
+	title = CharField(max_length=100)
 	short_description = TextField()
 	content = TextField()
 	premium = CharField(max_length=100, choices=PREMIUM_CHOICE)
