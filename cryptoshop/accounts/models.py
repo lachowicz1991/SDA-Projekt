@@ -5,11 +5,12 @@ from django.db.models import Model, TextField, CharField, URLField, FloatField, 
 
 class Customer(User):
 	LEVEL = (('Free', 'Free'),('Premium', 'Premium'))
-
 	mobile = CharField(max_length=12)
 	dob = DateField()
 	basket = ForeignKey
 	subscription = CharField(max_length=20, choices=LEVEL)
 
-class Staff(Customer):
+class Staff(User):
+	mobile = CharField(max_length=12)
+	dob = DateField()
 	rank = CharField(max_length=20)
