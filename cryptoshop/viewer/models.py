@@ -25,8 +25,8 @@ class Product(Model):
 	price = FloatField(null=True)
 	image = ImageField(upload_to='product', blank=True)
 
-	# Jakub branch
 
 
-# Matt branch
+
+
 
