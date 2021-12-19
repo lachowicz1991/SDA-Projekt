@@ -1,5 +1,5 @@
-from django.db.models import Model, TextField, CharField, FloatField, ImageField
-
+from django.db.models import Model, TextField, CharField, FloatField, ImageField, SlugField
+from django.utils.text import slugify
 # Create your models here.
 
 
@@ -29,8 +29,14 @@ class Product(Model):
 class FAQ(Model):
 	question = CharField(max_length=128)
 	answer = TextField()
-	# Jakub branch
+	slug = SlugField(max_length=128, unique=True)
 
+	def save(self, *args, **kwargs):
+		if not self.slug:
+			self.slug = slugify(self.question)
+		super().save(*args, **kwargs)
 
-# Matt branch
+	def __str__(self):
+		return self.question
+
 

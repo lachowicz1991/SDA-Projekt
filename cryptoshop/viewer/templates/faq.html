@@ -1,50 +1,25 @@
 {% extends 'index.html' %}
 {% block content %}
-FAQ
-<div class="accordion" id="accordionExample">
+<h2>FAQ</h2>
+
+
+  <div class="accordion" id="accordionExample">
+      {% for faq in faqy %}
   <div class="card">
     <div class="card-header" id="headingOne">
       <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          1. Co to jest blockchain?
+       <button class="btn btn-link btn-block text-left " type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse"">
+           {{ faq.question }}
         </button>
       </h2>
     </div>
+  <div id="collapse" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        {{ faq.answer }}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+<a class="btn btn-primary" href="{% url 'faq-create' %}">New Question</a>
 
-    <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-        tu jest odpowiedź na piewsze pytanie
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          2. Co to jest Bitcoin?
-        </button>
-      </h2>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-        Tu jest odpowiedź na drugie pytanie
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingThree">
-      <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          3. Co to jest Etherum?
-        </button>
-      </h2>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-      <div class="card-body">
-        Tu jest odpowiedź na trzecie pytanie
-      </div>
-    </div>
-  </div>
-  <a class="btn btn-secondary" href="{% url 'faq-create' %}">New Question</a>
-</div>
-{% endblock content %}
+{% endblock %}
