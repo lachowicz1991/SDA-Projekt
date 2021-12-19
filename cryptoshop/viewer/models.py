@@ -25,6 +25,10 @@ class Product(Model):
 	price = FloatField(null=True)
 	image = ImageField(upload_to='product', blank=True)
 
+
+class FAQ(Model):
+	question = CharField(max_length=128)
+	answer = TextField()
 	# Jakub branch
 
 
