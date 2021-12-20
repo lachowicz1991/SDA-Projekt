@@ -1,6 +1,5 @@
 from django.db.models import Model, TextField, CharField, FloatField, ImageField, SlugField
 from django.utils.text import slugify
-# Create your models here.
 
 #  Model used for the articles with external URLs for images.
 class Article(Model):
