@@ -2,7 +2,8 @@
 
 {% block content %}
     <h1>{{ faq.question }}</h1>
-    <p>Answer: {{ faq.answer }} </p>
+    <p><h3>Answer:</h3> {{ faq.answer }} </p>
+
 
 <a class="btn btn-secondary" href="{% url 'faq-update' faq.slug %}">Update Question</a>
 <a class="btn btn-danger" href="{% url 'faq-delete' faq.slug%}">Delete Question</a>

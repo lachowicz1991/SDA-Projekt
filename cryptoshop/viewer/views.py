@@ -1,5 +1,5 @@
 from logging import getLogger
-
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
@@ -21,7 +21,6 @@ class CoursesView(ListView):
     model = Product
     context_object_name = 'product'
 
-
 # View for the FAQ / Tomek
 
 
@@ -29,6 +28,9 @@ class FaqView(ListView):
     template_name = 'faq.html'
     model = FAQ
     context_object_name = 'faqy'
+
+    def get_queryset(self):
+        return FAQ.objects.all()
 
 
 class FaqDetailView(DetailView):

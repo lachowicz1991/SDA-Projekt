@@ -36,7 +36,5 @@ class FAQ(Model):
 			self.slug = slugify(self.question)
 		super().save(*args, **kwargs)
 
-	def __str__(self):
-		return self.question
 
 
