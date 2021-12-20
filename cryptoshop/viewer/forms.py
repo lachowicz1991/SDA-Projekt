@@ -7,6 +7,7 @@ class FaqForm(ModelForm):
     class Meta:
         model = FAQ
         fields = '__all__'
+        exclude = ['slug']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
