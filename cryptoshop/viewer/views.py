@@ -9,7 +9,7 @@ class IndexView(ListView):
 
 
 class AdvertView(ListView):
-    template_name = 'index.html'
+    template_name = 'home.html'
     model = Adverts
     context_object_name = 'adverts'
 
