@@ -1,6 +1,12 @@
+from logging import getLogger
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
-from .models import Article, Adverts
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+
+from .forms import FaqForm
+from .models import Article, Adverts, Product, FAQ
+
+LOGGER = getLogger()
 
 class IndexView(ListView):
     template_name = 'index.html'
@@ -51,7 +57,8 @@ class FaqDeleteView(DeleteView):
     template_name = 'faq_delete.html'
     model = FAQ
     success_url = reverse_lazy('faq')
-# Create your views here.
+
+# # View for Home / Emil
 
 class AdvertView(ListView):
     template_name = 'home.html'
