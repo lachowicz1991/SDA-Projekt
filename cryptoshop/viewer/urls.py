@@ -1,11 +1,16 @@
 from django.urls import path
 
-from .views import IndexView, CoursesView, FaqView, FaqCreateView, FaqUpdateView, FaqDeleteView, FaqDetailView, AdvertView
+from .views import IndexView, CoursesView, FaqView, FaqCreateView, FaqUpdateView, FaqDeleteView, FaqDetailView, \
+    AdvertView, AdvertCreateView, AdvertDetailView, AdvertUpdateView, AdvertDeleteView
 
 urlpatterns = [
 
     path('', IndexView.as_view(), name='index'),
-    path('adverts', AdvertView.as_view(), name='adverts'),
+    path('advert', AdvertView.as_view(), name='advert'),
+    path('advert/new', AdvertCreateView.as_view(), name='advert-create'),
+    path('advert/<slug:slug>', AdvertDetailView.as_view(), name='advert-detail'),
+    path('advert/<slug:slug>/edit', AdvertUpdateView.as_view(), name='advert-update'),
+    path('advert/<slug:slug>/delete', AdvertDeleteView.as_view(), name='advert-delete'),
     path('courses', CoursesView.as_view(), name='courses'),
     path('faq', FaqView.as_view(), name='faq'),
     path('faq/new', FaqCreateView.as_view(), name='faq-create'),
