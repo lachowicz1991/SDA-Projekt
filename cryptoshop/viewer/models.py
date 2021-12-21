@@ -1,4 +1,4 @@
-from django.db.models import Model, TextField, CharField, FloatField, ImageField
+from django.db.models import Model, TextField, CharField, ForeignKey, IntegerField, DateTimeField, FloatField, ImageField, BooleanField, SET_NULL
 
 # Create your models here.
 
@@ -7,23 +7,14 @@ from django.db.models import Model, TextField, CharField, FloatField, ImageField
 class Article(Model):
 	title = CharField(max_length=128)
 	content = TextField()
-	image = ImageField(upload_to='articles', blank=True)
+	image = ImageField(upload_to='articles', blank=True, null=True)
 
 
 class Adverts(Model):
 	title = CharField(max_length=128)
-	image = ImageField(upload_to='articles', blank=True)
+	image = ImageField(upload_to='images/', blank=True, null=True)
 
 
-class Product(Model):
-	PREMIUM_CHOICE = (('Yes', 'Yes'), ('No', 'No'))
-
-	title = CharField(max_length=100)
-	short_description = TextField()
-	content = TextField()
-	premium = CharField(max_length=100, choices=PREMIUM_CHOICE)
-	price = FloatField(null=True)
-	image = ImageField(upload_to='product', blank=True)
 
 
 
