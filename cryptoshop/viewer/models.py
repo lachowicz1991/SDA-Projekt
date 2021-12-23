@@ -1,3 +1,5 @@
+from django.db.models import Model, TextField, CharField, FloatField, ImageField, SlugField
+from django.utils.text import slugify
 from django.db.models import Model, TextField, CharField, ForeignKey, IntegerField, DateTimeField, FloatField, ImageField, BooleanField, SET_NULL
 
 # Create your models here.
@@ -9,15 +11,32 @@ class Article(Model):
 	content = TextField()
 	image = ImageField(upload_to='articles', blank=True, null=True)
 
-
-class Adverts(Model):
+# Model Adverts similar to article (Home)
+class Advert(Model):
 	title = CharField(max_length=128)
-	image = ImageField(upload_to='images/', blank=True, null=True)
+	content = TextField()
+	image = ImageField(upload_to='adverts', blank=True)
+	slug = SlugField(max_length=128, unique=True)
+
+	def save(self, *args, **kwargs):
+		if not self.slug:
+			self.slug = slugify(self.title)
+		super().save(*args, **kwargs)
+
+#	def __str__(self):
+#		return self.title
 
 
 
 
+class FAQ(Model):
+	question = CharField(max_length=128)
+	answer = TextField()
+	slug = SlugField(max_length=128, unique=True)
 
-
+	def save(self, *args, **kwargs):
+		if not self.slug:
+			self.slug = slugify(self.question)
+		super().save(*args, **kwargs)
 
 
