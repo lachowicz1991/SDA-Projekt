@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% block content %}
+<h2>Adverts</h2>
+{% for advert in adverts %}
+
+<div id="accordion">
+    <div class="card">
+        <div class="card-header" id="heading{{ advert.id }}">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ advert.id }}" aria-expanded="false"
+                        aria-controls="collapseOne">
+                     {{ advert.title }}
+                </button>
+            </h5>
+        </div>
+        <div id="collapse{{ advert.id }}" class="collapse " aria-labelledby="heading{{ advert.id }}" data-parent="#accordion">
+            <div class="card-body">
+
+                <ul>
+                    {{ advert.content }}
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endfor %}
+</br>
+<a class="btn btn-primary" href="{% url 'advert-create' %}">New Advert</a>
+{% endblock %}
