@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>{{ advert.title }}</h1>
+
+
+<a class="btn btn-secondary" href="{% url 'advert-update' advert.slug %}">Update Advert</a>
+<a class="btn btn-danger" href="{% url 'advert-delete' advert.slug %}">Delete Advert</a>
+
+{% endblock %}
