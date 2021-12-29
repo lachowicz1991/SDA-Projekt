@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<img class="row-image" src="{{ product_detail.image_url_safe}}">
+<h1>{{ product.name }} </h1>
+<h3>Premium: {{ product_detail.premium }}</h3>
+<h3>Digital: {{ product_detail.digital }}</h3>
+<p>Description: {{ product_detail.short_description }}</p>
+
+{% if perms.viewer.change_movie %}
+<button  data-product="{{ product_detail.id }}" data-action="add" class="btn btn-outline-secondary add-btn
+				update-cart">Add to Cart</button>
+{% endif %}
+{% if perms.viewer.delete_movie %}
+<a class="btn btn-danger" href="">Delete product</a>
+{% endif %}
+{% endblock %}
