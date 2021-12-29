@@ -8,7 +8,8 @@ from .views import IndexView
 
 urlpatterns = [
     path('index', IndexView.as_view(), name='index'),
-    path('news', views.home, name='home'),
+    path('news', views.home, name='home')
+
     path('', IndexView.as_view(), name='index'),
     path('advert', AdvertView.as_view(), name='advert'),
     path('advert/new', AdvertCreateView.as_view(), name='advert-create'),
