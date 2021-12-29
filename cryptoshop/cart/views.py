@@ -1,16 +1,10 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 import json
 import datetime
 from .models import *
 from accounts.models import Customer
 # Create your views here.
-
-class CourseDetailView(DetailView):
-    model = Product
-    template_name = 'course_detail.html'
-    context_object_name = 'product_detail'
 
 def store(request):
 	if request.user.is_authenticated:

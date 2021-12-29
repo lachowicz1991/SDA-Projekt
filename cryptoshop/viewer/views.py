@@ -3,15 +3,15 @@ from django.shortcuts import render
 import requests
 from django.views.generic import TemplateView, ListView
 from .models import Article
+
+API_KEY = 'ff230ce135704fccb7a61b36132c35f9'
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+
 from .forms import FaqForm, AdvertForm
-from .models import Article, Advert, FAQ
-API_KEY = 'ff230ce135704fccb7a61b36132c35f9'
+from .models import Article, Advert, Product, FAQ
 
 LOGGER = getLogger()
-
-
 
 class IndexView(ListView):
     template_name = 'index.html'
