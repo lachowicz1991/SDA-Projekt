@@ -89,15 +89,6 @@ h1,h2,h3,h4,h5,h6{
 	transition:.1s;
 }
 
-.chg-quantity-b{
-	width: 14px;
-	cursor: pointer;
-	display: block;
-	margin-top: 5px;
-	transition:.1s;
-}
-
-
 .chg-quantity:hover{
 	opacity: .6;
 }

@@ -4,19 +4,13 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 import json
 import datetime
 from .models import *
-from .forms import ProductForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
 from accounts.models import Customer
-
-
 # Create your views here.
 
 class CourseDetailView(DetailView):
-	model = Product
-	template_name = 'course_detail.html'
-	context_object_name = 'product_detail'
-
+    model = Product
+    template_name = 'course_detail.html'
+    context_object_name = 'product_detail'
 
 def store(request):
 	if request.user.is_authenticated:
@@ -30,7 +24,7 @@ def store(request):
 		cartitems = order['get_cart_items']
 
 	products = Product.objects.all()
-	context = {'products': products, 'cartitems': cartitems}
+	context = {'products':products, 'cartitems': cartitems}
 	return render(request, 'store.html', context)
 
 
@@ -44,8 +38,8 @@ def cart(request):
 		items = []
 		order = {'get_cart_total': 0, 'get_cart_items': 0}
 		cartitems = order['get_cart_items']
-	context = {'items': items, 'order': order, 'cartitems': cartitems}
-	return render(request, 'cart.html', context, )
+	context = {'items': items, 'order':order, 'cartitems':cartitems}
+	return render(request, 'cart.html', context,)
 
 
 def checkout(request):
@@ -56,18 +50,17 @@ def checkout(request):
 		cartitems = order.get_cart_items
 	else:
 		items = []
-		order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+		order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping':False}
 		cartitems = order['get_cart_items']
-	context = {'items': items, 'order': order, 'cartitems': cartitems}
+	context = {'items': items, 'order': order, 'cartitems':cartitems}
 	return render(request, 'checkout.html', context)
-
 
 def updateItem(request):
 	data = json.loads(request.body)
 	productid = data['productId']
 	action = data['action']
 
-	print('Action:', action)
+	print('Action:',action)
 	print('productId', productid)
 
 	customer = request.user.customer
@@ -81,16 +74,10 @@ def updateItem(request):
 	elif action == 'remove':
 		orderitem.quantity = (orderitem.quantity - 1)
 	orderitem.save()
-
-	if action == 'clear':
-		orderitem.quantity == 0
-		orderitem.delete()
-
 	if orderitem.quantity <= 0:
 		orderitem.delete()
 
 	return JsonResponse('Item was added', safe=False)
-
 
 def processOrder(request):
 	print('DATA:', request.body)
@@ -101,6 +88,7 @@ def processOrder(request):
 		order, created = Order.objects.get_or_create(customer=customer, complete=False)
 		total = data['form']['total']
 		order.transaction_id = transaction_id
+
 
 		if total == order.get_cart_total:
 			order.complete = True
@@ -118,22 +106,4 @@ def processOrder(request):
 	else:
 		print('User is not logged in...')
 	return JsonResponse('Payment complete!', safe=False)
-
-
-class ProductCreateView(LoginRequiredMixin, CreateView):
-	template_name = 'product_form.html'
-	form_class = ProductForm
-	success_url = reverse_lazy('store')
-
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
-	template_name = 'product_form.html'
-	model = Product
-	fields = '__all__'
-	success_url = reverse_lazy('store')
-
-
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
-	template_name = 'delete_form.html'
-	model = Product
-	success_url = reverse_lazy('store')
 
