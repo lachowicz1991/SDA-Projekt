@@ -12,11 +12,11 @@ API_KEY = 'ff230ce135704fccb7a61b36132c35f9'
 LOGGER = getLogger()
 
 
-
 class IndexView(ListView):
     template_name = 'index.html'
     model = Article
     context_object_name = 'article'
+
 
 def home(request):
     country = request.GET.get('country')
@@ -43,6 +43,7 @@ def home(request):
     return render(request, 'news.html', context)
 # View for the FAQ / Tomek
 
+
 class FaqView(ListView):
     template_name = 'faq.html'
     model = FAQ
@@ -50,6 +51,11 @@ class FaqView(ListView):
 
     def get_queryset(self):
         return FAQ.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(FaqView, self).get_context_data(**kwargs)
+        context['adverts'] = Advert.objects.all()
+        return context
 
 
 class FaqDetailView(DetailView):
@@ -81,6 +87,7 @@ class FaqDeleteView(DeleteView):
     success_url = reverse_lazy('faq')
 
 # # View for Home / Emil
+
 
 class AdvertView(ListView):
     template_name = 'advert.html'
