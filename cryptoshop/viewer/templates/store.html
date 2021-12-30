@@ -21,5 +21,9 @@
 	{% endfor %}
 
 	</div>
+
+<br>
+	<a class="btn btn-secondary" href="{% url 'product-create' %}?s=year">Create new product!</a>
+
 {% endblock  %}
 <h6>{{product.short_description}}</h6>
