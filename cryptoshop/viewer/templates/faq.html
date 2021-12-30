@@ -28,23 +28,78 @@
          <a class="btn btn-primary" href="{% url 'faq-create' %}">New Question</a>
  </div>
      <div class ="col-sm-4">
-            <div class="advert" style="width: 18rem;">
-            <h5 class="adverts-title">Adverts</h5>
-                <a href="index"><img src="/static/IMG_1117.JPG" class="img-thumbnail" alt="Responsive image"></a>
-            <p class="adverts-text">Krótki tekst zachęcający.asfasdasdas
-            asfasdasdasd
-            asdasdasda</p>
-            </div>
-        <div class="advert" style="width: 18rem;">
-            <h5 class="adverts-title">Adverts</h5>
-            <a href="index"><img src="/static/IMG_1117.JPG" class="img-thumbnail" alt="Responsive image"></a>
-            <p class="adverts-text">Krótki tekst zachęcający.asfasdasdas
-            asfasdasdasd
-            asdasdasda</p>
-            </div>
          </br>
+<!--            <div class="advert" style="width: 18rem;">-->
+<!--            <h5 class="adverts-title">Adverts</h5>-->
+<!--                <a href="index"><img src="/static/IMG_1117.JPG" class="img-thumbnail" alt="Responsive image"></a>-->
+<!--            <p class="adverts-text">Krótki tekst zachęcający.asfasdasdas-->
+<!--            asfasdasdasd-->
+<!--            asdasdasda</p>-->
+<!--            </div>-->
+<!--        <div class="advert" style="width: 18rem;">-->
+<!--            <h5 class="adverts-title">Adverts</h5>-->
+<!--            <a href="index"><img src="/static/IMG_1117.JPG" class="img-thumbnail" alt="Responsive image"></a>-->
+<!--            <p class="adverts-text">Krótki tekst zachęcający.asfasdasdas-->
+<!--            asfasdasdasd-->
+<!--            asdasdasda</p>-->
+<!--            </div>-->
+<!--         </br>-->
+<!--         {% for advert in adverts %}-->
+<!---->
+<!--<div id="accordion">-->
+<!--    <div class="card">-->
+<!--        <div class="card-header" id="heading{{ advert.id }}">-->
+<!--            <h5 class="mb-0">-->
+<!--                     {{ advert.title }}-->
+<!--            </h5>-->
+<!--        </div>-->
+<!---->
+<!--                <div class="img" style=" float: align; width: 15em; height: 15em;">-->
+<!--                <img class="img-thumbnail" src=" {{ advert.image }} " alt="image" style="width: 15em;">-->
+<!--    </div>-->
+<!--        {{ advert.content }}-->
+<!--</div>-->
+<!--{% endfor %}-->
+         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                {% for advert in adverts %}
+                        <div id="accordion1">
+                            <div class="card">
+                            <div class="card-header" id="heading1{{ advert.id }}">
+                                <h5 class="mb-0">
+                                    {{ advert.title }}
+                                </h5>
+                            </div>
+                                <div class="img" style=" float: align; width: 15em; height: 15em;">
+                            <img class="img-thumbnail" src=" {{ advert.image }} " alt="image" style="width: 15em;">
+                                </div>
+                                    {{ advert.content }}
+                            </div>
+                        </div>
+                {% endfor %}
+                    </div>
+                    <div class="carousel-item">
+                {% for advert in adverts %}
+                        <div id="accordion2{{ advert.id }} ">
+                            <div class="card">
+                                 <div class="card-header" id="heading2{{ advert.id }}">
+                                    <h5 class="mb-0">
+                                    {{ advert.title }}
+                                    </h5>
+                                 </div>
+                                <div class="img" style=" float: align; width: 15em; height: 15em;">
+                                <img class="img-thumbnail" src=" {{ advert.image }} " alt="image" style="width: 15em;">
+                                </div>
+                                    {{ advert.content }}
+                            </div>
+                        </div>
+                {% endfor %}
+                    </div>
+                </div>
+         </div>
         <a class="btn btn-primary" href="{% url 'advert-create' %}">New Adverts</a>
-    </div>
+     </div>
  </div>
 </br>
 
