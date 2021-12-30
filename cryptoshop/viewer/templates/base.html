@@ -82,6 +82,7 @@
                     {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}" class="dropdown-item text-right">Logout</a>
                                     <a class="dropdown-item text-right" href="{% url 'change_password' %}">Change password</a>
+                   <a class="dropdown-item text-right" href="{% url 'controls' %}">Controls</a>
                     {% else %}
                 <a href="{% url 'login' %}" class="dropdown-item text-right">Login</a>
                     {% endif %}
@@ -89,6 +90,7 @@
             </div>
         </div>
     </div>
+
 </div>
 </nav>
 <!-- TradingView Widget BEGIN -->
