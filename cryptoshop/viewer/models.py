@@ -23,10 +23,17 @@ class Advert(Model):
 			self.slug = slugify(self.title)
 		super().save(*args, **kwargs)
 
-#	def __str__(self):
-#		return self.title
+	def __str__(self):
+		return self.title
 
-
+	# Jakub branch
+	PREMIUM_CHOICE = (('Yes', 'Yes'), ('No', 'No'))
+	title = CharField(max_length=100)
+	short_description = TextField()
+	content = TextField()
+	premium = CharField(max_length=100, choices=PREMIUM_CHOICE)
+	price = FloatField(null=True)
+	image = ImageField(upload_to='product', blank=True)
 
 
 class FAQ(Model):
