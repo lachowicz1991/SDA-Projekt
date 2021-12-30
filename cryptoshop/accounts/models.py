@@ -13,7 +13,7 @@ class Customer(Model):
 
 
 	def __str__(self):
-		return self.user
+		return self.user.username
 
 class Staff(User):
 	mobile = CharField(max_length=12)

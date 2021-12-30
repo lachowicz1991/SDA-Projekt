@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 import json
 import datetime
 from .models import *
-from accounts.models import Customer
+from .forms import ProductForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 # Create your views here.
 
 class CourseDetailView(DetailView):
@@ -13,97 +15,117 @@ class CourseDetailView(DetailView):
     context_object_name = 'product_detail'
 
 def store(request):
-	if request.user.is_authenticated:
-		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, complete=False)
-		items = order.orderitem_set.all()
-		cartitems = order.get_cart_items
-	else:
-		items = []
-		order = {'get_cart_total': 0, 'get_cart_items': 0}
-		cartitems = order['get_cart_items']
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartitems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartitems = order['get_cart_items']
 
-	products = Product.objects.all()
-	context = {'products':products, 'cartitems': cartitems}
-	return render(request, 'store.html', context)
+    products = Product.objects.all()
+    context = {'products':products, 'cartitems': cartitems}
+    return render(request, 'store.html', context)
 
 
 def cart(request):
-	if request.user.is_authenticated:
-		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, complete=False)
-		items = order.orderitem_set.all()
-		cartitems = order.get_cart_items
-	else:
-		items = []
-		order = {'get_cart_total': 0, 'get_cart_items': 0}
-		cartitems = order['get_cart_items']
-	context = {'items': items, 'order':order, 'cartitems':cartitems}
-	return render(request, 'cart.html', context,)
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartitems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartitems = order['get_cart_items']
+    context = {'items': items, 'order':order, 'cartitems':cartitems}
+    return render(request, 'cart.html', context,)
 
 
 def checkout(request):
-	if request.user.is_authenticated:
-		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, complete=False)
-		items = order.orderitem_set.all()
-		cartitems = order.get_cart_items
-	else:
-		items = []
-		order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping':False}
-		cartitems = order['get_cart_items']
-	context = {'items': items, 'order': order, 'cartitems':cartitems}
-	return render(request, 'checkout.html', context)
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartitems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping':False}
+        cartitems = order['get_cart_items']
+    context = {'items': items, 'order': order, 'cartitems':cartitems}
+    return render(request, 'checkout.html', context)
+
 
 def updateItem(request):
-	data = json.loads(request.body)
-	productid = data['productId']
-	action = data['action']
+    data = json.loads(request.body)
+    productid = data['productId']
+    action = data['action']
 
-	print('Action:',action)
-	print('productId', productid)
+    print('Action:',action)
+    print('productId', productid)
 
-	customer = request.user.customer
-	product = Product.objects.get(id=productid)
-	order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    customer = request.user.customer
+    product = Product.objects.get(id=productid)
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
-	orderitem, created = OrderItem.objects.get_or_create(order=order, product=product)
+    orderitem, created = OrderItem.objects.get_or_create(order=order, product=product)
 
-	if action == 'add':
-		orderitem.quantity = (orderitem.quantity + 1)
-	elif action == 'remove':
-		orderitem.quantity = (orderitem.quantity - 1)
-	orderitem.save()
-	if orderitem.quantity <= 0:
-		orderitem.delete()
+    if action == 'add':
+        orderitem.quantity = (orderitem.quantity + 1)
+    elif action == 'remove':
+        orderitem.quantity = (orderitem.quantity - 1)
+    orderitem.save()
+    if orderitem.quantity <= 0:
+        orderitem.delete()
 
-	return JsonResponse('Item was added', safe=False)
+    return JsonResponse('Item was added', safe=False)
+
 
 def processOrder(request):
-	print('DATA:', request.body)
-	transaction_id = datetime.datetime.now().timestamp()
-	data = json.loads(request.body)
-	if request.user.is_authenticated:
-		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, complete=False)
-		total = data['form']['total']
-		order.transaction_id = transaction_id
+    print('DATA:', request.body)
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = data['form']['total']
+        order.transaction_id = transaction_id
 
 
-		if total == order.get_cart_total:
-			order.complete = True
-		order.save()
+        if total == order.get_cart_total:
+            order.complete = True
+        order.save()
 
-		if order.shipping == True:
-			ShippingAddress.objects.create(
-				customer=customer,
-				order=order,
-				address=data['shipping']['address'],
-				city=data['shipping']['city'],
-				state=data['shipping']['state'],
-			)
+        if order.shipping == True:
+            ShippingAddress.objects.create(
+                customer=customer,
+                order=order,
+                address=data['shipping']['address'],
+                city=data['shipping']['city'],
+                state=data['shipping']['state'],
+            )
 
-	else:
-		print('User is not logged in...')
-	return JsonResponse('Payment complete!', safe=False)
+    else:
+        print('User is not logged in...')
+    return JsonResponse('Payment complete!', safe=False)
 
+
+class ProductCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'product_form.html'
+    form_class = ProductForm
+    success_url = reverse_lazy('store')
+
+
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'product_form.html'
+    model = Product
+    fields = '__all__'
+    success_url = reverse_lazy('store')
+
+
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'delete_form.html'
+    model = Product
+    success_url = reverse_lazy('store')
