@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import pymongo
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     'viewer',
     'accounts',
     'cart',
+    'chat',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +74,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cryptoshop.wsgi.application'
+ASGI_APPLICATION = 'cryptoshop.routing.application'
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -119,6 +128,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+
+
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
@@ -132,3 +146,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
+
+

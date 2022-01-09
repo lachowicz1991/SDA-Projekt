@@ -1,18 +1,23 @@
-from django.shortcuts import render
-from django.http import JsonResponse
-from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
-import json
 import datetime
-from .models import *
-from .forms import ProductForm
+import json
+
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
+from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
+
+from .forms import ProductForm
+from .models import *
+
+
 # Create your views here.
 
 class CourseDetailView(DetailView):
     model = Product
     template_name = 'course_detail.html'
     context_object_name = 'product_detail'
+
 
 def store(request):
     if request.user.is_authenticated:
@@ -26,7 +31,7 @@ def store(request):
         cartitems = order['get_cart_items']
 
     products = Product.objects.all()
-    context = {'products':products, 'cartitems': cartitems}
+    context = {'products': products, 'cartitems': cartitems}
     return render(request, 'store.html', context)
 
 
@@ -40,8 +45,8 @@ def cart(request):
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartitems = order['get_cart_items']
-    context = {'items': items, 'order':order, 'cartitems':cartitems}
-    return render(request, 'cart.html', context,)
+    context = {'items': items, 'order': order, 'cartitems': cartitems}
+    return render(request, 'cart.html', context, )
 
 
 def checkout(request):
@@ -52,9 +57,9 @@ def checkout(request):
         cartitems = order.get_cart_items
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping':False}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartitems = order['get_cart_items']
-    context = {'items': items, 'order': order, 'cartitems':cartitems}
+    context = {'items': items, 'order': order, 'cartitems': cartitems}
     return render(request, 'checkout.html', context)
 
 
@@ -63,7 +68,7 @@ def updateItem(request):
     productid = data['productId']
     action = data['action']
 
-    print('Action:',action)
+    print('Action:', action)
     print('productId', productid)
 
     customer = request.user.customer
@@ -92,7 +97,6 @@ def processOrder(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         total = data['form']['total']
         order.transaction_id = transaction_id
-
 
         if total == order.get_cart_total:
             order.complete = True
