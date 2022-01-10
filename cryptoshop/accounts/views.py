@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, reverse_lazy, LogoutView, PasswordChangeView
 from django.views.generic import ListView, TemplateView, CreateView, DeleteView
-from .forms import UserCreationForm, CreateUserForm, User
+from .forms import UserCreationForm, CreateUserForm, CreateCustomerForm
 from .models import Customer
 from django.contrib import messages
 from django.contrib.auth.models import Group
@@ -10,23 +10,23 @@ from django.db.models import Q
 from .decorators import unauthenticated_user
 # Create your views here.
 
-
 def customer_registration(request):
     form = CreateUserForm()
+    form2 = CreateCustomerForm()
 
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
-        if form.is_valid():
+        form2 = CreateCustomerForm(request.POST)
+        if form.is_valid() and form2.is_valid():
             user = form.save()
-            username = form.cleaned_data.get('username')
+            form2.instance.user = user
+            form2.save()
+            username = user.username
             group = Group.objects.get(name='customer')
             user.groups.add(group)
-            Customer.objects.create(
-                user=user,
-            )
-            messages.success(request, 'Account was created for ' + username)
+            messages.success(request, f'Account was created for {username}')
             return redirect('index')
-    context = {'form': form}
+    context = {'form': form, 'form2': form2}
     return render(request, 'signup.html', context)
 
 def account_view(request):
