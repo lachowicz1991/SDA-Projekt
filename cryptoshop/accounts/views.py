@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, reverse_lazy, LogoutView, PasswordChangeView
 from django.views.generic import ListView, TemplateView, CreateView, DeleteView
-from .forms import UserCreationForm, CreateUserForm, CreateCustomerForm
+from .forms import UserCreationForm, CreateUserForm, CreateCustomerForm, User
 from .models import Customer
 from django.contrib import messages
 from django.contrib.auth.models import Group
@@ -28,6 +28,18 @@ def customer_registration(request):
             return redirect('index')
     context = {'form': form, 'form2': form2}
     return render(request, 'signup.html', context)
+
+def customer_update(request, id):
+    user = User.objects.get(id=id)
+    customer = Customer.objects.get(id=id)
+    form = CreateUserForm(instance=user)
+    form2 = CreateCustomerForm(instance=customer)
+
+    context = {'form': form, 'form2': form2}
+    return render(request, 'forms.html', context)
+
+
+
 
 def account_view(request):
 

@@ -112,7 +112,7 @@ class AdvertDetailView(DetailView):
 class AdvertCreateView(CreateView):
     template_name = 'advert_form.html'
     form_class = AdvertForm
-    success_url = reverse_lazy('advert')
+    success_url = reverse_lazy('index')
 
 
 class AdvertUpdateView(UpdateView):
@@ -130,5 +130,3 @@ class AdvertDeleteView(DeleteView):
     template_name = 'advert_delete.html'
     model = Advert
     success_url = reverse_lazy('advert')
-
-# Create your views here.
