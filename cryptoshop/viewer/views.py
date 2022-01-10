@@ -1,12 +1,13 @@
 from logging import getLogger
-from django.shortcuts import render
+
 import requests
-from django.views.generic import TemplateView, ListView
-from .models import Article
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+
 from .forms import FaqForm, AdvertForm
 from .models import Article, Advert, FAQ
+
 API_KEY = 'ff230ce135704fccb7a61b36132c35f9'
 
 LOGGER = getLogger()
@@ -30,19 +31,20 @@ def home(request):
         print(articles)
 
     else:
-        url = f'https://newsapi.org/v2/top-headlines?category={category}&apiKey={API_KEY}'
+        url = f'https://newsapi.org/v2/top-headlines?category={category}&country=pl&apiKey={API_KEY}'
         response = requests.get(url)
         data = response.json()
         articles = data['articles']
         print(articles)
 
     context = {
-        'articles' :articles
+        'articles': articles
     }
 
     return render(request, 'news.html', context)
-# View for the FAQ / Tomek
 
+
+# View for the FAQ / Tomek
 
 class FaqView(ListView):
     template_name = 'faq.html'
@@ -51,11 +53,6 @@ class FaqView(ListView):
 
     def get_queryset(self):
         return FAQ.objects.all()
-
-    def get_context_data(self, **kwargs):
-        context = super(FaqView, self).get_context_data(**kwargs)
-        context['adverts'] = Advert.objects.all()
-        return context
 
 
 class FaqDetailView(DetailView):
@@ -86,8 +83,8 @@ class FaqDeleteView(DeleteView):
     model = FAQ
     success_url = reverse_lazy('faq')
 
-# # View for Home / Emil
 
+# # View for Home / Emil
 
 class AdvertView(ListView):
     template_name = 'advert.html'
