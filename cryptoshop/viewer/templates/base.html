@@ -41,16 +41,13 @@
                     FAQ
                 </a>
 
-
                 <a class="nav-item nav-link active" href="{% url 'home' %}">
                     News
                 </a>
 
-
                 <a class="nav-item nav-link active" href="{% url 'store' %}">
                     Courses
                 </a>
-
 
                 <a class="nav-item nav-link active" href="">
                     Premium
@@ -87,7 +84,7 @@
                     {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}" class="dropdown-item text-right">Logout</a>
                                     <a class="dropdown-item text-right" href="{% url 'change_password' %}">Change password</a>
-                                    <a class="dropdown-item text-right" href="{% url 'password_reset' %}">Reset password</a>
+                                    <a class="dropdown-item text-right" href="{% url 'reset_password' %}">Reset password</a>
                    <a class="dropdown-item text-right" href="{% url 'controls' %}">Controls</a>
                     {% else %}
                 <a href="{% url 'login' %}" class="dropdown-item text-right">Login</a>

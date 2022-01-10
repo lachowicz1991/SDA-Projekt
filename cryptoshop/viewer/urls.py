@@ -3,6 +3,7 @@ from django.urls import path
 from .views import IndexView, FaqView, FaqCreateView, FaqUpdateView, FaqDeleteView, FaqDetailView, \
     AdvertView, AdvertCreateView, AdvertDetailView, AdvertUpdateView, AdvertDeleteView, home
 
+
 urlpatterns = [
     path('news', home, name='home'),
     path('', IndexView.as_view(), name='index'),

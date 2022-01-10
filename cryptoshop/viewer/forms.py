@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import FAQ
+from .models import FAQ, Advert
 
 
 class FaqForm(ModelForm):
@@ -13,6 +13,7 @@ class FaqForm(ModelForm):
         super().__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+
 
 class AdvertForm(ModelForm):
 
