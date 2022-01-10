@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'viewer',
     'accounts',
     'cart',
+    'chat',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +73,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cryptoshop.wsgi.application'
+ASGI_APPLICATION = 'cryptoshop.routing.application'
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

@@ -11,6 +11,7 @@ class Article(Model):
 	content = TextField()
 	image = ImageField(upload_to='articles', blank=True, null=True)
 
+
 # Model Adverts similar to article (Home)
 class Advert(Model):
 	title = CharField(max_length=128)

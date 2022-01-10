@@ -97,3 +97,27 @@ h1,h2,h3,h4,h5,h6{
 .hidden{
 	display: none!important;
 }
+.faq-heading{
+    border-bottom: #777;
+    padding: 10px 90px;
+}
+.question{
+display: flex;
+justify-content: center;
+flex-direction: column;
+
+}
+.question {
+    /* background-color: #eee; */
+    color: #444;
+    cursor: pointer;
+    padding: 30px 20px;
+    width: 60%;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    margin: auto;
+
+}
+
+

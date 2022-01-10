@@ -1,5 +1,6 @@
 from django.db import models
-from django.db.models import Model, TextField, CharField, ForeignKey, IntegerField, DateTimeField, FloatField, ImageField, BooleanField, SET_NULL
+from django.db.models import Model, TextField, CharField, ForeignKey, IntegerField, DateTimeField, FloatField, \
+	ImageField, BooleanField, SET_NULL
 from accounts.models import Customer
 # Create your models here.
 

@@ -14,6 +14,7 @@ class FaqForm(ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
 
+
 class AdvertForm(ModelForm):
 
     class Meta:
