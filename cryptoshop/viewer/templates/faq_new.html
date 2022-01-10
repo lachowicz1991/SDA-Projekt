@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% block content %}
+<link rel="stylesheet" href="faq.css">
+<h2>FAQ</h2>
+{% for faq in faqy %}
+<main>
+        <h1 class="faq-heading">FAQ'S</h1>
+        <section class="faq-container">
+            <div class="faq" id="heading{{ faq.id }}>
+                <!-- faq question -->
+                <h1 class="faq-page">{{ faq.question }}</h1>
+                <!-- faq answer -->
+                <div class="faq-body">
+                    <p>{{ faq.answer }}</p>
+                </div>
+            </div>
+            <hr class="hr-line">
+            <hr class="hr-line">
+
+        </section>
+    </main>
+    <script src="faq.js"></script>
+{% endfor %}
+</br>
+<a class="btn btn-primary" href="{% url 'faq-create' %}">New Question</a>
+{% endblock %}
