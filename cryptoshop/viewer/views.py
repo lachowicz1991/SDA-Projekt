@@ -30,8 +30,16 @@ def home(request):
         articles = data['articles']
         print(articles)
 
-    else:
+    elif category:
+
         url = f'https://newsapi.org/v2/top-headlines?category={category}&country=pl&apiKey={API_KEY}'
+        response = requests.get(url)
+        data = response.json()
+        articles = data['articles']
+        print(articles)
+
+    else:
+        url = f'https://newsapi.org/v2/top-headlines?country=PL&apiKey={API_KEY}'
         response = requests.get(url)
         data = response.json()
         articles = data['articles']
