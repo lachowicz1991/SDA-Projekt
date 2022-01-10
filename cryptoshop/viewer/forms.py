@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import FAQ, Advert
+from .models import FAQ
 
 
 class FaqForm(ModelForm):

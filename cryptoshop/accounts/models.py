@@ -6,11 +6,8 @@ from django.db.models import Model, TextField, CASCADE, OneToOneField, CharField
 
 class Customer(Model):
 	user = OneToOneField(User, on_delete=CASCADE)
-	LEVEL = (('Free', 'Free'),('Premium', 'Premium'))
-	mobile = CharField(max_length=12)
-	dob = DateField()
-	subscription = CharField(max_length=20, choices=LEVEL)
-
+	mobile = CharField(max_length=12,null=True)
+	dob = DateField(null=True)
 
 	def __str__(self):
 		return self.user.username

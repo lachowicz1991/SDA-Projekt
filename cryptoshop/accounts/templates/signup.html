@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<form method="post">
+    <p>Register user:</p>
+
+        {% csrf_token %}
+    {{ form.username.label }}
+    {{ form.username }}
+    <br>
+    {{ form.email.label }}
+    {{ form.email }}
+    <br>
+    {{ form.password1.label }}
+    {{ form.password1 }}
+    <br>
+    {{ form.password2.label }}
+    {{ form.password2 }}
+    <br>
+    {{ form2.mobile.label }}
+    {{ form2.mobile }}
+
+    <br>
+    {{ form2.dob.label }}
+    {{ form2.dob }}
+
+        <br>
+        <br>
+        <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+{% endblock %}

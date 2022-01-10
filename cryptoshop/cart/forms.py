@@ -12,7 +12,7 @@ class ProductForm(ModelForm):
 		model = Product
 		fields = '__all__'
 
-	PREMIUM_CHOICE = (('Yes', 'Yes'), ('No', 'No'))
+	# PREMIUM_CHOICE = (('Yes', 'Yes'), ('No', 'No'))
 
 	# name = CharField(max_length=200)
 	# short_description = CharField(max_length=200, widget=Textarea)
