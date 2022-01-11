@@ -19,7 +19,7 @@ class IndexView(ListView):
     context_object_name = 'article'
 
 
-def home(request):
+def news(request):
     country = request.GET.get('country')
     category = request.GET.get('category')
 
