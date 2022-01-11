@@ -1,13 +1,12 @@
 from django.urls import path
 
-from .views import IndexView, FaqView, FaqCreateView, FaqUpdateView, FaqDeleteView, FaqDetailView, \
+from .views import FaqView, FaqCreateView, FaqUpdateView, FaqDeleteView, FaqDetailView, \
     AdvertView, AdvertCreateView, AdvertDetailView, AdvertUpdateView, AdvertDeleteView, news
 
 
 urlpatterns = [
     path('news', news, name='news'),
-    path('', IndexView.as_view(), name='index'),
-    path('advert', AdvertView.as_view(), name='advert'),
+    path('', AdvertView.as_view(), name='advert'),
     path('advert/new', AdvertCreateView.as_view(), name='advert-create'),
     path('advert/<slug:slug>', AdvertDetailView.as_view(), name='advert-detail'),
     path('advert/<slug:slug>/edit', AdvertUpdateView.as_view(), name='advert-update'),

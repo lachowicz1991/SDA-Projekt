@@ -13,13 +13,15 @@ from .models import *
 
 # Create your views here.
 
+
+
 class CourseDetailView(DetailView):
     model = Product
     template_name = 'course_detail.html'
     context_object_name = 'product_detail'
 
-
 def store(request):
+
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)

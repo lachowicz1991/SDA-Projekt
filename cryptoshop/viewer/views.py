@@ -13,10 +13,6 @@ API_KEY = 'ff230ce135704fccb7a61b36132c35f9'
 LOGGER = getLogger()
 
 
-class IndexView(ListView):
-    template_name = 'index.html'
-    model = Article
-    context_object_name = 'article'
 
 
 def news(request):
