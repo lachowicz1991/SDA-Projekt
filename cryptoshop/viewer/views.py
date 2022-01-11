@@ -7,6 +7,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 
 from .forms import FaqForm, AdvertForm
 from .models import Article, Advert, FAQ
+from cart.models import Product
 
 API_KEY = 'ff230ce135704fccb7a61b36132c35f9'
 
@@ -14,12 +15,12 @@ LOGGER = getLogger()
 
 
 class IndexView(ListView):
-    template_name = 'index.html'
+    template_name = 'advert.html'
     model = Article
     context_object_name = 'article'
 
 
-def home(request):
+def news(request):
     country = request.GET.get('country')
     category = request.GET.get('category')
 
@@ -53,6 +54,11 @@ class FaqView(ListView):
 
     def get_queryset(self):
         return FAQ.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(FaqView, self).get_context_data(**kwargs)
+        context['adverts'] = Advert.objects.all()
+        return context
 
 
 class FaqDetailView(DetailView):
@@ -123,4 +129,8 @@ class AdvertDeleteView(DeleteView):
     model = Advert
     success_url = reverse_lazy('advert')
 
+
+class PremiumView(ListView):
+    template_name = 'cryptomarket.html'
+    model = Product
 # Create your views here.

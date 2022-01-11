@@ -41,7 +41,7 @@
                     FAQ
                 </a>
 
-                <a class="nav-item nav-link active" href="{% url 'home' %}">
+                <a class="nav-item nav-link active" href="{% url 'news' %}">
                     News
                 </a>
 
@@ -49,11 +49,26 @@
                     Courses
                 </a>
 
-                <a class="nav-item nav-link active" href="">
-                    Premium
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                Premium
                 </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'cryptomarket' %}">Crypto Market</a>
+                    <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Predictions</a>
+                    <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Investment Strategies</a>
+                    <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Tip-off</a>
+                    <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'technnical_analysis' %}">Technical Analysis</a>
+                    <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'chat' %}">Chat with Expert</a>
+                </div>
+                </li>
 
-                <a class="nav-item nav-link active" href="{% url 'chat' %}">
+                <a class="nav-item nav-link active" href="">
                     Contact
                 </a>
                 <!-- Cart button -->
