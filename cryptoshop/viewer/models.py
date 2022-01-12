@@ -13,8 +13,6 @@ class Article(Model):
 
 
 # Model Adverts similar to article (Home)
-class Carousel(Model):
-    image = ImageField()
 
 class Advert(Model):
 	title = CharField(max_length=128)
