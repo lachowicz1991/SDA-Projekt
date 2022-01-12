@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from .forms import FaqForm, AdvertForm
-from .models import Article, Advert, FAQ
+from .models import Article, Advert, FAQ, Carousel
 
 API_KEY = 'ff230ce135704fccb7a61b36132c35f9'
 
