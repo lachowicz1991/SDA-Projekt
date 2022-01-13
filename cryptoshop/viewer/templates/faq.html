@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% block title %}
+FAQ
+{% endblock %}
+
 {% block content %}
 <img src="static/faq.png" class="img-fluid" alt="Responsive image">
 <!--<h1 class="faq-heading">FAQ'S</h1>-->
@@ -27,69 +31,57 @@
          <a class="btn btn-primary" href="{% url 'faq-create' %}">New Question</a>
  </div>
      <div class ="col-sm-4">
-
          </br>
-         <div class="carousel slide" id="carouselExampleSlidesOnly"  data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item-active">
-                        <div class="card">
-                            {% for advert in adverts %}
-                                    {{ advert.title }}
-                                <div class="img" style=" float: align; width: 15em; height: 15em;">
-                                    <a href="{% url 'advert-detail' advert.slug %}"><img class="thumbnail" src="{{ advert.image_url_safe }}"></a>
-                                    {{ advert.content }}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="card">
-                            {% for advert in adverts %}
-<!--                            {% if forloop.counter < 4 < 8 %}-->
-                            <div class="card-header">
-                                <div class="img" style=" float: align; width: 15em; height: 15em;">
-                                    <a href="{% url 'advert-detail' advert.slug %}"><img class="thumbnail" src="{{ advert.image_url_safe }}"></a>
-                                    {{ advert.title }}
-                                    {{ advert.content }}
-                                </div>
-                            </div>
-<!--                            {% endif %}-->
-                            {% endfor %}
-                        </div>
-<!--                    <div class="carousel-item active">-->
-<!--                        <div class="card">-->
-<!--                            {% for advert in adverts %}-->
-<!--                            <div class="card-header" id="heading2{{ advert.id }}">-->
-<!--                                    {{ advert.title }}-->
-<!--                                <div class="img" style=" float: align; width: 15em; height: 15em;">-->
-<!--                                    <a href="{% url 'advert-detail' advert.slug %}"><img class="thumbnail" src="{{ advert.image_url_safe }}"></a>-->
-<!--                                    {{ advert.content }}-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            {% endfor %}-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="carousel-item">-->
-<!--                {% for advert in adverts %}-->
-<!--                            <div class="card">-->
-<!--                                <div class="card-header" id="heading3{{ advert.id }}">-->
-<!--                                <h5 class="mb-0">-->
-<!--                                    {{ advert.title }}-->
-<!--                                </h5>-->
-<!--                                </div>-->
-<!--                                <div class="img" style=" float: align; width: 15em; height: 15em;">-->
-<!--                            <img class="thumbnail" src="{{ advert.image_url_safe }}">-->
-<!--                                </div>-->
-<!--                                    {{ advert.content }}-->
-<!--                            </div>-->
-<!--                            {% endfor %}-->
-
+         <div id="carouselslide" class="carousel slide" data-ride="carousel">
+             <div class="carousel-inner">
+        {% for advert in adverts %}
+            {% if forloop.first %}
+                <div class="carousel-item active  ">
+            {% else %}
+                  <div class="carousel-item  ">
+            {% endif %}
+                      <h5>{{ advert.title }}</h5>
+               <div class="img" style=" float: align; width: 15em; height: 15em;">
+                   <a href="{% url 'advert-detail' advert.slug %}"><img class="thumbnail" src="{{ advert.image_url_safe }}"></a>
+               </div>
                 </div>
-         </div>
-
+        {% endfor %}
+            </div>
+  </div>
+             <div id="carouselslide1" class="carousel slide" data-ride="carousel">
+             <div class="carousel-inner">
+        {% for advert in adverts %}
+            {% if forloop.counter == 2 %}
+                <div class="carousel-item active  ">
+            {% else %}
+                  <div class="carousel-item  ">
+            {% endif %}
+                      <h5>{{ advert.title }}</h5>
+               <div class="img" style=" float: align; width: 15em; height: 15em;">
+                   <a href="{% url 'advert-detail' advert.slug %}"><img class="thumbnail" src="{{ advert.image_url_safe }}"></a>
+               </div>
+                </div>
+        {% endfor %}
+            </div>
+  </div>
+<div id="carouselslide2" class="carousel slide" data-ride="carousel">
+             <div class="carousel-inner">
+        {% for advert in adverts %}
+            {% if forloop.counter == 3 %}
+                <div class="carousel-item active  ">
+            {% else %}
+                  <div class="carousel-item  ">
+            {% endif %}
+                      <h5>{{ advert.title }}</h5>
+               <div class="img" style=" float: align; width: 15em; height: 15em;">
+                   <a href="{% url 'advert-detail' advert.slug %}"><img class="thumbnail" src="{{ advert.image_url_safe }}"></a>
+               </div>
+                </div>
+        {% endfor %}
+            </div>
+  </div>
         <a class="btn btn-primary" href="{% url 'advert-create' %}">New Adverts</a>
      </div>
- </div>
  </div>
 </br>
 

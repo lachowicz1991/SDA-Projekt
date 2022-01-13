@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
     <h1>{{ strategy.title }}</h1>
-    <p><h3>Content:</h3> {{ strategy.content }} </p>
+    <img class="thumbnail" src="{{ strategy.image_url_safe }}">
+    <h3>{{ strategy.short_description }}</h3>
+    <p> {{ strategy.content }} </p>
 
 
-<a class="btn btn-secondary" href="{% url 'investment-strategies-update' investment_strategies.slug %}">Update Stretegies</a>
-<a class="btn btn-danger" href="{% url 'investment-strategies-delete' investment_strategies.slug%}">Delete Stretegies</a>
+<a class="btn btn-secondary" href="{% url 'investment_strategies-update' strategy.slug %}">Update Stretegy</a>
+<a class="btn btn-danger" href="{% url 'investment_strategies-delete' strategy.slug%}">Delete Stretegy</a>
 
 {% endblock %}
