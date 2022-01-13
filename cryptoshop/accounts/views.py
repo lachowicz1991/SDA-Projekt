@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.views import LoginView, reverse_lazy, LogoutView, PasswordChangeView
-from django.views.generic import ListView, TemplateView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, DeleteView
 from .forms import UserCreationForm, CreateUserForm, CreateCustomerForm, User
 from .models import Customer
-from django.contrib import messages
+from cart.models import ShippingAddress
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.db.models import Q
@@ -58,6 +58,16 @@ def staff_list_view(request):
     staff = Customer.objects.filter(user__groups__name='staff')
     context = {'staff': staff}
     return render(request, 'staffcontrol.html', context)
+
+class OrderListView(ListView):
+    template_name = 'orderscontrol.html'
+    model = ShippingAddress
+    context_object_name = 'orders'
+
+class FaqDetailView(DetailView):
+    model = ShippingAddress
+    template_name = 'order_detail.html'
+    context_object_name = 'order'
 
 
 class CustomLoginView(LoginView):
