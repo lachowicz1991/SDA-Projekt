@@ -16,6 +16,15 @@ class Predictions(Model):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
+    @property
+    def image_url_safe(self):
+        try:
+            url = self.image.url
+
+        except:
+            url = ''
+        return url
+
 
 #Model Investment Strategies(Premium)
 class InvestmentStrategies(Model):
@@ -30,6 +39,14 @@ class InvestmentStrategies(Model):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
+    @property
+    def image_url_safe(self):
+        try:
+            url = self.image.url
+
+        except:
+            url = ''
+        return url
 
 #Model Breaking News(Premium)
 class BreakingNews(Model):
@@ -43,3 +60,12 @@ class BreakingNews(Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    @property
+    def image_url_safe(self):
+        try:
+            url = self.image.url
+
+        except:
+            url = ''
+        return url

@@ -31,20 +31,20 @@ class PredictionsView(ListView):
 class PredictionsDetailView(DetailView):
     model = Predictions
     template_name = 'predictions_detail.html'
-    context_object_name = 'predictions'
+    context_object_name = 'prediction'
 
 
 class PredictionsCreateView(CreateView):
     template_name = 'predictions_form.html'
     form_class = PredictionsForm
-    success_url = reverse_lazy('predictions')
+    success_url = reverse_lazy('prediction')
 
 
 class PredictionsUpdateView(UpdateView):
     template_name = 'predictions_form.html'
     model = Predictions
     form_class = PredictionsForm
-    success_url = reverse_lazy('predictions')
+    success_url = reverse_lazy('prediction')
 
     def form_invalid(self, form):
         LOGGER.warning('User provided wrong data.')
@@ -54,7 +54,7 @@ class PredictionsUpdateView(UpdateView):
 class PredictionsDeleteView(DeleteView):
     template_name = "predictions_delete.html"
     model = Predictions
-    success_url = reverse_lazy('predictions')
+    success_url = reverse_lazy('prediction')
 
 
 class BreakingNewsView(ListView):
@@ -69,7 +69,7 @@ class BreakingNewsView(ListView):
 class BreakingNewsDetailView(DetailView):
     model = BreakingNews
     template_name = 'breaking_news_detail.html'
-    context_object_name = 'breakings_news'
+    context_object_name = 'news'
 
 
 class BreakingNewsCreateView(CreateView):
@@ -107,7 +107,7 @@ class InvestmentStrategiesView(ListView):
 class InvestmentStrategiesDetailView(DetailView):
     model = InvestmentStrategies
     template_name = "investment_strategies_detail.html"
-    context_object_name = 'strategies'
+    context_object_name = 'strategy'
 
 
 class InvestmentStrategiesCreateView(CreateView):
