@@ -26,8 +26,16 @@ def news(request):
         articles = data['articles']
         print(articles)
 
-    else:
+    elif category:
+
         url = f'https://newsapi.org/v2/top-headlines?category={category}&country=pl&apiKey={API_KEY}'
+        response = requests.get(url)
+        data = response.json()
+        articles = data['articles']
+        print(articles)
+
+    else:
+        url = f'https://newsapi.org/v2/top-headlines?country=pl&apiKey={API_KEY}'
         response = requests.get(url)
         data = response.json()
         articles = data['articles']
@@ -49,6 +57,11 @@ class FaqView(ListView):
 
     def get_queryset(self):
         return FAQ.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(FaqView, self).get_context_data(**kwargs)
+        context['adverts'] = Advert.objects.all()
+        return context
 
 
 class FaqDetailView(DetailView):

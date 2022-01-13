@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.views import LoginView, reverse_lazy, LogoutView, PasswordChangeView
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, DeleteView
 from .forms import UserCreationForm, CreateUserForm, CreateCustomerForm, User
@@ -53,6 +53,7 @@ def customer_list_view(request):
     context = {'customer': customer, 'premium': premium}
     return render(request, 'customercontrol.html', context)
 
+
 def staff_list_view(request):
     staff = Customer.objects.filter(user__groups__name='staff')
     context = {'staff': staff}
@@ -68,15 +69,22 @@ class FaqDetailView(DetailView):
     template_name = 'order_detail.html'
     context_object_name = 'order'
 
+
 class CustomLoginView(LoginView):
     template_name = 'forms.html'
+
+    # def get_success_url(self, **kwargs):
+    #     return reverse("chat")
+
 
 class CustomPasswordChangeView(PasswordChangeView):
     template_name = 'forms.html'
     success_url = reverse_lazy('index')
 
+
 class Controls(TemplateView):
     template_name = 'controls.html'
+
 
 class UserDeleteView(DeleteView):
     template_name = 'delete_form.html'

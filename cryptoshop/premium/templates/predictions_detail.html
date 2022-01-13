@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ prediction.title }}</h1>
+    <p><h3>Content:</h3> {{ prediction.content }} </p>
+
+
+<a class="btn btn-secondary" href="{% url 'prediction-update' predictions.slug %}">Update Prediction</a>
+<a class="btn btn-danger" href="{% url 'prediction-delete' predictions.slug%}">Delete Prediction</a>
+
+{% endblock %}
