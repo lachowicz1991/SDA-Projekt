@@ -113,7 +113,7 @@ class AdvertDetailView(DetailView):
 class AdvertCreateView(CreateView):
     template_name = 'advert_form.html'
     form_class = AdvertForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('advert')
 
 
 class AdvertUpdateView(UpdateView):
