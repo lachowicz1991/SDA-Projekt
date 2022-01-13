@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ breaking_news.title }}</h1>
+    <p><h3>Content:</h3> {{ breaking_news.content }} </p>
+
+
+<a class="btn btn-secondary" href="{% url 'breaking-news-update' breaking_news.slug %}">Update Breaking News</a>
+<a class="btn btn-danger" href="{% url 'breaking-news-delete' breaking_news.slug%}">Delete Breaking News</a>
+
+{% endblock %}

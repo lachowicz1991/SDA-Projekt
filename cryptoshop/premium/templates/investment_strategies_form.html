@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+            {{ form.title.errors }}
+            <label for="{{ form.title.id_for_label }}">Investment Strategies title</label>
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            {{ form.content.errors }}
+            <label for="{{ form.content.id_for_label }}">Investment Strategies content</label>
+            {{ form.content }}
+        </div>
+        <div class="form-group">
+            {{ form.short_description.errors }}
+            <label for="{{ form.short_description.id_for_label }}">Investment Strategies image</label>
+            {{ form.short_description }}
+        </div>
+        <div class="form-group">
+            {{ form.image.errors }}
+            <label for="{{ form.image.id_for_label }}">Investment Strategies image</label>
+            {{ form.image }}
+        </div>
+        <input type="submit" value="Submit investment strategies" class="btn btn-primary">
+    </form>
+{% endblock content %}

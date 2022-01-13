@@ -24,10 +24,7 @@
             </div>
         </div>
          {% endfor %}
-         {% if user.is_authenticated %}
          <a class="btn btn-primary" href="{% url 'faq-create' %}">New Question</a>
-         {% else %}
-         {% endif %}
  </div>
      <div class ="col-sm-4">
 
@@ -37,13 +34,11 @@
                     <div class="carousel-item-active">
                         <div class="card">
                             {% for advert in adverts %}
-<!--                            {% if forloop.counter < 4 %}-->
                                     {{ advert.title }}
                                 <div class="img" style=" float: align; width: 15em; height: 15em;">
                                     <a href="{% url 'advert-detail' advert.slug %}"><img class="thumbnail" src="{{ advert.image_url_safe }}"></a>
                                     {{ advert.content }}
                                 </div>
-<!--                            {% endif %}-->
                             {% endfor %}
                         </div>
                     </div>
@@ -91,10 +86,8 @@
 
                 </div>
          </div>
-         {% if user.is_authenticated %}
+
         <a class="btn btn-primary" href="{% url 'advert-create' %}">New Adverts</a>
-        {% else %}
-         {% endif %}
      </div>
  </div>
  </div>
