@@ -1,4 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-{% endblock %}
+<div class="row">
+	{% for strategy in strategies %}
+		<div class="col-lg-4">
+			<img class="thumbnail" src="{{ strategy.image_url_safe }}">
+			<div class="box-element product">
+				<h6><strong>{{strategy.title}}</strong></h6>
+				<hr>
+				<a class="btn btn-outline-success" href="{% url 'investment_strategies-detail' product.id %}">View</a>
+				<h4 style="display: inline-block; float: right"><strong>${{strategy.short_description}}</strong></h4>
+
+			</div>
+		</div>
+	{% endfor %}
+
+	</div>
+
+<br>
+	<a class="btn btn-secondary" href="{% url 'product-create' %}?s=year">Create new product!</a>
+
+{% endblock  %}
