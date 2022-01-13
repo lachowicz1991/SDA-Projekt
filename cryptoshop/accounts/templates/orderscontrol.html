@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="font1">Our orders:</h1>
+    <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">User ID</th>
+      <th scope="col"><a class="btn btn-secondary" href="">Date</a></th>
+        <th scope="col"><a class="btn btn-secondary" href="">Customer</a></th>
+      <th scope="col"><a class="btn btn-secondary" href="">Email</a></th>
+        <th scope="col"><a class="btn btn-secondary" href="">Phone</a></th>
+    </tr>
+  </thead>
+  <tbody>
+
+        {% for c in orders %}
+        <tr>
+            <td>{{c.id}}</td>
+        <td>
+        <a href="">{{ c.date_added }}</a></td>
+        <td>{{c.customer.user.first_name}} {{c.customer.user.last_name}} </td>
+        <td>{{c.customer.user.email}}</td>
+        <td>{{c.customer.user.mobile}}</td>
+        <td>{{ c.dob}}</td>
+        <td><a class="btn btn-primary" href="">Details</a></td>
+        <td><a class="btn btn-danger" href="">Delete</a></td>
+        <td><a class="btn btn-success" href="">Update</a></td>
+        </tr>
+        {% endfor %}
+  </tbody>
+  </table>
+{% endblock  %}
