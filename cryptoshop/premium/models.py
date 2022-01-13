@@ -13,7 +13,7 @@ class Predictions(Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.question)
+            self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
 
@@ -27,7 +27,7 @@ class InvestmentStrategies(Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.question)
+            self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
 
@@ -41,5 +41,5 @@ class BreakingNews(Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.question)
+            self.slug = slugify(self.title)
         super().save(*args, **kwargs)
