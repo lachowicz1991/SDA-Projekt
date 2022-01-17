@@ -36,7 +36,7 @@ class ProfileUpdateView(UpdateView):
     model = User
     success_url = reverse_lazy('controls')
 
-    def get_object(self):
+    def get_object(self, queryset=None):
         return Customer.objects.get(pk=self.kwargs['pk']).user
         # Not working
 

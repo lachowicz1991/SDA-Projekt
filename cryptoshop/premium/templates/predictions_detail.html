@@ -6,7 +6,6 @@
     <h3> {{ prediction.short_description }}</h3>
     <p>{{ prediction.content }} </p>
 
-
 <a class="btn btn-secondary" href="{% url 'prediction-update' prediction.slug %}">Update Prediction</a>
 <a class="btn btn-danger" href="{% url 'prediction-delete' prediction.slug%}">Delete Prediction</a>
 

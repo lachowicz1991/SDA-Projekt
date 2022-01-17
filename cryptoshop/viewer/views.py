@@ -95,6 +95,15 @@ class FaqDeleteView(DeleteView):
 
 # # View for Home / Emil
 
+
+class AdvertControlView(ListView):
+    template_name = 'advert-control.html'
+    model = Advert
+    context_object_name = 'adverts'
+
+    def get_queryset(self):
+        return Advert.objects.all()
+
 class AdvertView(ListView):
     template_name = 'advert.html'
     model = Advert

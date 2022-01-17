@@ -8,8 +8,8 @@
 			<div class="box-element prediction">
 				<h6><strong>{{ prediction.title}}</strong></h6>
 				<hr>
-				<a href="{% url 'prediction-detail' prediction.slug %}"><strong>{{ prediction.short_description }}</strong></a>
-
+				<a class="btn btn-outline-success" href="{% url 'prediction-detail' prediction.slug%}">View</a>
+				<h4 style="display: inline-block; float: right"><strong>${{ prediction.short_description }}</strong></h4>
 			</div>
 		</div>
 	{% endfor %}

@@ -47,8 +47,3 @@ class UserCustomerForm(ModelForm):
 	class Meta:
 		model = Customer
 		fields = ['mobile', 'dob']
-
-
-
-
-
