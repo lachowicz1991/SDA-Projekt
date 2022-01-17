@@ -2,7 +2,7 @@
 {% load auth_extras %}
 {% load static %}
 {% block content %}
-{% if request.user|has_group:"premium" %}
+{% if perms.premium.view_breaking_news %}
 <div class="row">
 	{% for news in breakings_news %}
 		<div class="col-lg-4">

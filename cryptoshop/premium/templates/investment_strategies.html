@@ -2,7 +2,7 @@
 {% load auth_extras %}
 {% load static %}
 {% block content %}
-{% if request.user|has_group:"premium" %}
+{% if perms.premium.investment_strategies %}
 <div class="row">
 	{% for strategy in strategies %}
 		<div class="col-lg-4">

@@ -2,7 +2,7 @@
 {% load auth_extras %}
 {% load static %}
 {% block content %}
-{% if request.user|has_group:"premium" %}
+{% if perms.premium.view_predictions %}
 <div class="row">
 	{% for prediction in predictions %}
 		<div class="col-lg-4">
