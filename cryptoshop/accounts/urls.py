@@ -1,5 +1,5 @@
 from .views import CustomLoginView, group_list_view, CustomPasswordChangeView, OrderListView, Controls, UserDeleteView, customer_registration,\
-	staff_list_view, customer_list_view, customer_update, GroupUpdateView, ProfileUpdateView
+	staff_list_view, customer_list_view, GroupUpdateView, ProfileUpdateView
 from django.contrib.auth.views import LogoutView, PasswordResetCompleteView,PasswordResetDoneView,\
 	PasswordResetConfirmView, PasswordResetView
 from django.urls import path, include
