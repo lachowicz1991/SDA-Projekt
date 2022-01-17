@@ -26,7 +26,7 @@ def customer_registration(request):
             group = Group.objects.get(name='customer')
             user.groups.add(group)
             messages.success(request, f'Account was created for {username}')
-            return redirect('index')
+            return redirect('advert')
     context = {'form': form, 'form2': form2}
     return render(request, 'signup.html', context)
 
