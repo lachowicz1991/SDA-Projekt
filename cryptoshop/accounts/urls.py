@@ -1,7 +1,8 @@
-from .views import CustomLoginView, CustomPasswordChangeView, OrderListView, Controls, UserDeleteView, customer_registration,\
-	staff_list_view, customer_list_view, customer_update
+from .views import CustomLoginView,  CustomPasswordChangeView, OrderListView, Controls, UserDeleteView, customer_registration,\
+	staff_list_view, customer_list_view, ProfileUpdateView
 from django.contrib.auth.views import LogoutView, PasswordResetCompleteView,PasswordResetDoneView,\
 	PasswordResetConfirmView, PasswordResetView
+from viewer.views import AdvertControlView
 from django.urls import path, include
 
 
@@ -12,10 +13,11 @@ urlpatterns = [
 	path('controls', Controls.as_view(), name='controls'),
 	path('signup', customer_registration, name='signup'),
 	path('orders', OrderListView.as_view(), name='orders'),
+	path('advert-control', AdvertControlView.as_view(), name='advert-control'),
 	path('customercontrol', customer_list_view, name='customercontrol'),
 	path('staffcontrol', staff_list_view, name='staffcontrol'),
 	path('<int:pk>/delete', UserDeleteView.as_view(), name='user-delete'),
-	path('<int:id>/update', customer_update, name='user-update'),
+	path('<int:pk>/update', ProfileUpdateView.as_view(), name='user-update'),
 	path('', include('viewer.urls')),
 	path('reset_password/',
 		 PasswordResetView.as_view(template_name="password_reset.html"),

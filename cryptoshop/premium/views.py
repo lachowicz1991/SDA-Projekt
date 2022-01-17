@@ -37,14 +37,14 @@ class PredictionsDetailView(DetailView):
 class PredictionsCreateView(CreateView):
     template_name = 'predictions_form.html'
     form_class = PredictionsForm
-    success_url = reverse_lazy('predictions')
+    success_url = reverse_lazy('prediction')
 
 
 class PredictionsUpdateView(UpdateView):
     template_name = 'predictions_form.html'
     model = Predictions
     form_class = PredictionsForm
-    success_url = reverse_lazy('predictions')
+    success_url = reverse_lazy('prediction')
 
     def form_invalid(self, form):
         LOGGER.warning('User provided wrong data.')

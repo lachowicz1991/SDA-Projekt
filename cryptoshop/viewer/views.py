@@ -95,6 +95,15 @@ class FaqDeleteView(DeleteView):
 
 # # View for Home / Emil
 
+
+class AdvertControlView(ListView):
+    template_name = 'advert-control.html'
+    model = Advert
+    context_object_name = 'adverts'
+
+    def get_queryset(self):
+        return Advert.objects.all()
+
 class AdvertView(ListView):
     template_name = 'advert.html'
     model = Advert
@@ -113,7 +122,7 @@ class AdvertDetailView(DetailView):
 class AdvertCreateView(CreateView):
     template_name = 'advert_form.html'
     form_class = AdvertForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('advert')
 
 
 class AdvertUpdateView(UpdateView):

@@ -16,6 +16,14 @@ class Predictions(Model):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
+    def image_url_safe(self):
+        try:
+            url = self.image.url
+
+        except:
+            url = ''
+        return url
+
 
 #Model Investment Strategies(Premium)
 class InvestmentStrategies(Model):
