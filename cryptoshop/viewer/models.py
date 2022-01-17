@@ -1,7 +1,5 @@
-from django.db.models import Model, TextField, CharField, FloatField, ImageField, SlugField
 from django.utils.text import slugify
-from django.db.models import Model, TextField, CharField, ForeignKey, IntegerField, DateTimeField, FloatField, ImageField, BooleanField, SET_NULL
-
+from django.db.models import Model, TextField, CharField,SlugField, ImageField
 # Create your models here.
 
 

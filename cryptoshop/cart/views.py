@@ -1,18 +1,17 @@
 import datetime
 import json
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, TemplateView
 
 from .forms import ProductForm
 from .models import *
 
 
 # Create your views here.
-
 
 
 class CourseDetailView(DetailView):
@@ -118,20 +117,24 @@ def processOrder(request):
     return JsonResponse('Payment complete!', safe=False)
 
 
-class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'product_form.html'
     form_class = ProductForm
     success_url = reverse_lazy('store')
+    permission_required = 'cart.add_product'
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+
+class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'product_form.html'
     model = Product
     fields = '__all__'
     success_url = reverse_lazy('store')
+    permission_required = 'cart.change_product'
 
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
+class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Product
     success_url = reverse_lazy('store')
+    permission_required = 'cart.delete_product'

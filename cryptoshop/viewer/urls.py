@@ -5,6 +5,7 @@ from .views import FaqView, FaqCreateView, FaqUpdateView, FaqDeleteView, FaqDeta
     ArticleDeleteView, ArticleUpdateView, ArticleView
 
 
+
 urlpatterns = [
     path('news', news, name='news'),
     path('', AdvertView.as_view(), name='advert'),
@@ -21,4 +22,5 @@ urlpatterns = [
     path('faq/<slug:slug>', FaqDetailView.as_view(), name='faq-detail'),
     path('faq/<slug:slug>/edit', FaqUpdateView.as_view(), name='faq-update'),
     path('faq/<slug:slug>/delete', FaqDeleteView.as_view(), name='faq-delete'),
+
 ]

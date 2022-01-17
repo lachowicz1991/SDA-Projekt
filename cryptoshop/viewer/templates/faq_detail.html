@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
     <h1>{{ faq.question }}</h1>
     <p><h3>Answer:</h3> {{ faq.answer }} </p>
 
-
+{% if perms.viewer.change_faq %}
 <a class="btn btn-secondary" href="{% url 'faq-update' faq.slug %}">Update Question</a>
 <a class="btn btn-danger" href="{% url 'faq-delete' faq.slug%}">Delete Question</a>
-
+{% endif %}
 {% endblock %}

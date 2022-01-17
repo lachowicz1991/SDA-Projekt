@@ -7,7 +7,7 @@ from django.utils.text import slugify
 class Predictions(Model):
     title = CharField(max_length=128)
     content = TextField()
-    short_description = TextField()
+    short_description = TextField(null=True, blank=True)
     image = ImageField(upload_to='predictions', blank=True, null=True)
     slug = SlugField(max_length=128, unique=True)
 
@@ -30,7 +30,7 @@ class Predictions(Model):
 class InvestmentStrategies(Model):
     title = CharField(max_length=128)
     content = TextField()
-    short_description = TextField()
+    short_description = TextField(null=True, blank=True)
     image = ImageField(upload_to='images', blank=True, null=True)
     slug = SlugField(max_length=128, unique=True)
 
@@ -52,7 +52,7 @@ class InvestmentStrategies(Model):
 class BreakingNews(Model):
     title = CharField(max_length=128)
     content = TextField()
-    short_description = TextField()
+    short_description = TextField(null=True, blank=True)
     image = ImageField(upload_to='images', blank=True, null=True)
     slug = SlugField(max_length=128, unique=True)
 
