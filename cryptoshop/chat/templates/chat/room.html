@@ -6,6 +6,7 @@ Room
 {% endblock %}
 
 {% block content %}
+{% if perms.chat_add_message %}
 <section class="section">
             <div class="container">
                 <div class="columns is-multiline">
@@ -95,4 +96,5 @@ Room
                 messageInputDom.value = '';
             };
         </script>
+{% endif %}
 {% endblock %}
