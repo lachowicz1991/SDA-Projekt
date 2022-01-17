@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.views import LoginView, reverse_lazy, LogoutView, PasswordChangeView
-from django.views.generic import ListView, DetailView, TemplateView, CreateView, DeleteView
-from .forms import UserCreationForm, CreateUserForm, CreateCustomerForm, User
+from django.views.generic import ListView, UpdateView, DetailView, TemplateView, CreateView, DeleteView
+from .forms import AdminUserUpdateForm, CreateUserForm, CreateCustomerForm
 from .models import Customer
 from cart.models import ShippingAddress
 from django.contrib.auth.models import Group
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.db.models import Q
 from .decorators import unauthenticated_user
 # Create your views here.
@@ -25,26 +26,19 @@ def customer_registration(request):
             group = Group.objects.get(name='customer')
             user.groups.add(group)
             messages.success(request, f'Account was created for {username}')
-            return redirect('index')
+            return redirect('advert')
     context = {'form': form, 'form2': form2}
     return render(request, 'signup.html', context)
 
-def customer_update(request, id):
-    user = User.objects.get(id=id)
-    customer = Customer.objects.get(id=id)
-    form = CreateUserForm(instance=user)
-    form2 = CreateCustomerForm(instance=customer)
+class ProfileUpdateView(UpdateView):
+    template_name = 'forms.html'
+    form_class = AdminUserUpdateForm
+    model = User
+    success_url = reverse_lazy('controls')
 
-    context = {'form': form, 'form2': form2}
-    return render(request, 'forms.html', context)
-
-
-
-
-def account_view(request):
-
-    context = {}
-    return render(request, 'account.html', context)
+    def get_object(self, queryset=None):
+        return Customer.objects.get(pk=self.kwargs['pk']).user
+        # Not working
 
 
 def customer_list_view(request):
@@ -59,12 +53,24 @@ def staff_list_view(request):
     context = {'staff': staff}
     return render(request, 'staffcontrol.html', context)
 
+def group_list_view(request):
+    group = Group.objects.all()
+    context = {'group': group}
+    return render(request, 'groupscontrol.html', context)
+
+class GroupUpdateView(UpdateView):
+    template_name = 'forms.html'
+    model = Group
+    fields = '__all__'
+    success_url = reverse_lazy('groupcontrol')
+
 class OrderListView(ListView):
     template_name = 'orderscontrol.html'
     model = ShippingAddress
     context_object_name = 'orders'
 
-class FaqDetailView(DetailView):
+
+class OrderDetailView(DetailView):
     model = ShippingAddress
     template_name = 'order_detail.html'
     context_object_name = 'order'
@@ -90,3 +96,4 @@ class UserDeleteView(DeleteView):
     template_name = 'delete_form.html'
     model = Customer
     success_url = reverse_lazy('controls')
+
