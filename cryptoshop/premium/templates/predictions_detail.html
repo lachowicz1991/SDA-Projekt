@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <h1>{{ prediction.title }}</h1>
-    <img class="thumbnail" src="{{ prediction.image_url_safe }}">
-    <h3> {{ prediction.short_description }}</h3>
+    <h1 class="lobster">{{ prediction.title }}</h1>
+    <img class="thumbnail" src="{{ prediction.image_url_safe}}">
+    <h6> {{ prediction.short_description }}</h6>
     <p>{{ prediction.content }} </p>
 
 <a class="btn btn-secondary" href="{% url 'prediction-update' prediction.slug %}">Update Prediction</a>

@@ -6,10 +6,10 @@
 		<div class="col-lg-4">
 			<a href="{% url 'prediction-detail' prediction.slug %}"><img class="thumbnail" src="{{ prediction.image_url_safe }}"></a>
 			<div class="box-element prediction">
-				<h6><strong>{{ prediction.title}}</strong></h6>
-				<hr>
+				<h6 class="lobster"><strong>{{ prediction.title}}</strong></h6>
+				{{ prediction.short_description }}
 				<a class="btn btn-outline-success" href="{% url 'prediction-detail' prediction.slug%}">View</a>
-				<h4 style="display: inline-block; float: right"><strong>${{ prediction.short_description }}</strong></h4>
+
 			</div>
 		</div>
 	{% endfor %}
