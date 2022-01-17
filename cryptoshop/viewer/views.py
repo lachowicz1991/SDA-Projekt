@@ -127,14 +127,14 @@ class AdvertDetailView(DetailView):
 class AdvertCreateView(CreateView):
     template_name = 'advert_form.html'
     form_class = AdvertForm
-    success_url = reverse_lazy('advert')
+    success_url = reverse_lazy('advert-control')
 
 
 class AdvertUpdateView(UpdateView):
     template_name = 'advert_form.html'
     model = Advert
     form_class = AdvertForm
-    success_url = reverse_lazy('advert')
+    success_url = reverse_lazy('advert-control')
 
     def form_invalid(self, form):
         LOGGER.warning('User provided wrong data.')
@@ -144,10 +144,18 @@ class AdvertUpdateView(UpdateView):
 class AdvertDeleteView(DeleteView):
     template_name = 'advert_delete.html'
     model = Advert
-    success_url = reverse_lazy('advert')
+    success_url = reverse_lazy('advert-control')
 
 
 # View for Home / Emil (Article)
+
+class ArticleControlView(ListView):
+    template_name = 'article-control.html'
+    model = Article
+    context_object_name = 'articles'
+
+    def get_queryset(self):
+        return Article.objects.all()
 
 class ArticleView(ListView):
     template_name = 'article.html'
@@ -164,18 +172,18 @@ class ArticleDetailView(DetailView):
     context_object_name = 'article'
 
 
-class ArticleCreateView(PermissionRequiredMixin, CreateView):
+class ArticleCreateView(CreateView):
     template_name = 'article_form.html'
     form_class = ArticleForm
-    success_url = reverse_lazy('article')
-    permission_required = 'viewer.add_article'
+    success_url = reverse_lazy('article-control')
+ #   permission_required = 'viewer.add_article'
 
 
 class ArticleUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'article_form.html'
     model = Article
     form_class = ArticleForm
-    success_url = reverse_lazy('article')
+    success_url = reverse_lazy('article-control')
     permission_required = 'viewer.change_article'
 
     def form_invalid(self, form):
@@ -186,5 +194,5 @@ class ArticleUpdateView(PermissionRequiredMixin, UpdateView):
 class ArticleDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'article_delete.html'
     model = Article
-    success_url = reverse_lazy('article')
+    success_url = reverse_lazy('article-control')
     permission_required = 'viewer.delete_article'
