@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
     <h1>{{ news.title }}</h1>
     <img class="thumbnail" src="{{ news.image_url_safe }}">
     <h3> {{ news.short_description }}</h3>
     <p> {{ news.content }} </p>
 
-{% if request.user|has_group:"Content manager" %}
+{% if request.user|has_group:"staff" %}
 <a class="btn btn-secondary" href="{% url 'breaking_news-update' news.slug %}">Update Breaking News</a>
 <a class="btn btn-danger" href="{% url 'breaking_news-delete' news.slug%}">Delete Breaking News</a>
 {% endif %}

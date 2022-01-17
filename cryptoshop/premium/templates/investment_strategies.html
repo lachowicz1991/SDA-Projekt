@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% load static %}
 {% load auth_extras %}
+{% load static %}
 {% block content %}
-{% if request.user|has_group:"user_premium" %}
+{% if request.user|has_group:"premium" %}
 <div class="row">
 	{% for strategy in strategies %}
 		<div class="col-lg-4">
@@ -19,7 +19,7 @@
 	</div>
 {% endif %}
 <br>
-{% if request.user|has_group:"Content manager" %}
+{% if request.user|has_group:"staff" %}
 	<a class="btn btn-secondary" href="{% url 'investment_strategies-create' %}">Create new Strategy!</a>
 {% endif %}
 {% endblock  %}

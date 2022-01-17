@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="lobster">Our faq's:</h1>
+    <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">FAQ ID</th>
+      <th scope="col"><a class="btn btn-secondary" href="">Question</a></th>
+        <th scope="col"><a class="btn btn-secondary" href="">Answer</a></th>
+    </tr>
+  </thead>
+  <tbody>
+
+        {% for faq in faqy %}
+        <tr>
+            <td>{{faq.id}}</td>
+        <td>
+        <td>{{faq.question}} </td>
+            <td>{{faq.answer}} </td>
+        <td><a class="btn btn-primary" href="{% url 'faq-detail' faq.slug %}">Details</a></td>
+        <td><a class="btn btn-danger" href="{% url 'faq-delete' faq.slug %}">Delete</a></td>
+        <td><a class="btn btn-success" href="{% url 'faq-update' faq.slug %}">Update</a></td>
+        </tr>
+        {% endfor %}
+  </tbody>
+        <a class="btn btn-success" href="{% url 'faq-create' %}">Create new faq</a>
+  </table>
+
+{% endblock  %}

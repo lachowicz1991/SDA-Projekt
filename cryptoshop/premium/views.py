@@ -12,14 +12,6 @@ from .models import InvestmentStrategies, Predictions, BreakingNews
 LOGGER = getLogger()
 
 
-def is_premium(user):
-    return user.groups.filter(name='Premium').exists()
-
-
-class PremiumView(TemplateView):
-    template_name = "premium.html"
-
-
 class CryptoView(PermissionRequiredMixin, TemplateView):
     template_name = "cryptomarket.html"
     permission_required = 'premium.view_predictions'

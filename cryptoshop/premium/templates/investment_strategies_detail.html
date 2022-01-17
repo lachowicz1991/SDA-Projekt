@@ -6,7 +6,7 @@
     <h3>{{ strategy.short_description }}</h3>
     <p> {{ strategy.content }} </p>
 
-{% if request.user|has_group:"Content manager" %}
+{% if request.user|has_group:"staff" %}
 <a class="btn btn-secondary" href="{% url 'investment_strategies-update' strategy.slug %}">Update Stretegy</a>
 <a class="btn btn-danger" href="{% url 'investment_strategies-delete' strategy.slug %}">Delete Stretegy</a>
 {% endif %}

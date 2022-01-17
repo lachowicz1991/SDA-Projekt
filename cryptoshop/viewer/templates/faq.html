@@ -6,14 +6,14 @@ FAQ
 
 {% block content %}
 <img src="static/faq.png" class="img-fluid" alt="Responsive image">
-<!--<h1 class="faq-heading">FAQ'S</h1>-->
+
  <div class="row">
      <div class="col-sm-8">
          </br>
          {% for faq in faqy %}
         <div id="faq">
             <div class="card">
-                {% if request.user|has_group:"Content manager" %}
+                {% if request.user|has_group:"staff" %}
                 <div class="card-header" id="heading{{ faq.id }}">
                     <div class="btn btn" id="question" data-toggle="collapse" data-target="#collapse{{ faq.id }}" aria-expanded="false"
                         aria-controls="collapseOne">
@@ -38,7 +38,7 @@ FAQ
             </div>
         </div>
          {% endfor %}
-         {% if request.user|has_group:"Content manager" %}
+         {% if request.user|has_group:"staff" %}
          <a class="btn btn-primary" href="{% url 'faq-create' %}">New Question</a>
          {% endif %}
  </div>
@@ -93,9 +93,6 @@ FAQ
             </div>
   </div>
 
-{% if request.user|has_group:"Content manager" %}
-             <a class="btn btn-primary" href="{% url 'advert-create' %}">New Adverts</a>
-{% endif %}
      </div>
              </div>
          </div>

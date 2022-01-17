@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% load static %}
 {% load auth_extras %}
+{% load static %}
 {% block content %}
-{% if request.user|has_group:"user_premium" %}
+{% if request.user|has_group:"premium" %}
 <div class="row">
 	{% for prediction in predictions %}
 		<div class="col-lg-4">
@@ -19,7 +19,7 @@
 	</div>
 {% endif %}
 <br>
-{% if request.user|has_group:"Content manager" %}
+{% if request.user|has_group:"staff" %}
 	<a class="btn btn-secondary" href="{% url 'prediction-create' %}">Create new prediction!</a>
 {% endif %}
 

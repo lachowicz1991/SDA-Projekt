@@ -47,6 +47,11 @@ def news(request):
 
 
 # View for the FAQ / Tomek
+class FaqControlView(ListView):
+    template_name = 'faq-control.html'
+    model = FAQ
+    context_object_name = 'faqy'
+
 
 class FaqView(ListView):
     template_name = 'faq.html'
@@ -94,6 +99,21 @@ class FaqDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'viewer.delete_faq'
 
 # # View for Home / Emil
+
+
+class AdvertControlView(ListView):
+    template_name = 'advert-control.html'
+    model = Advert
+    context_object_name = 'adverts'
+
+
+class AdvertControlView(ListView):
+    template_name = 'advert-control.html'
+    model = Advert
+    context_object_name = 'adverts'
+
+    def get_queryset(self):
+        return Advert.objects.all()
 
 
 class AdvertView(ListView):
