@@ -144,7 +144,7 @@ class AdvertUpdateView(UpdateView):
 class AdvertDeleteView(DeleteView):
     template_name = 'advert_delete.html'
     model = Advert
-    success_url = reverse_lazy('advert-control')
+    success_url = reverse_lazy('advert')
 
 
 # View for Home / Emil (Article)
