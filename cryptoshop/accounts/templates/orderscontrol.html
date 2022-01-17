@@ -1,64 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="font1">Our premium customers:</h1>
+    <h1 class="font1">Our orders</h1>
     <table class="table table-dark">
   <thead>
     <tr>
-      <th scope="col">User ID</th>
-      <th scope="col"><a class="btn btn-secondary" href="">Username</a></th>
-        <th scope="col"><a class="btn btn-secondary" href="">Name</a></th>
-      <th scope="col"><a class="btn btn-secondary" href="">Email</a></th>
-        <th scope="col"><a class="btn btn-secondary" href="">Phone</a></th>
-        <th scope="col"><a class="btn btn-secondary" href="">Date of Birth</a></th>
+      <th scope="col">Order ID</th>
+      <th scope="col"><a class="btn btn-secondary" href="">Date</a></th>
+        <th scope="col"><a class="btn btn-secondary" href="">Customer</a></th>
+      <th scope="col"><a class="btn btn-secondary" href="">Order</a></th>
+        <th scope="col"><a class="btn btn-secondary" href="">Address</a></th>
+        <th scope="col"><a class="btn btn-secondary" href="">City</a></th>
+        <th scope="col"><a class="btn btn-secondary" href="">State</a></th>
     </tr>
   </thead>
   <tbody>
 
-        {% for c in premium %}
+        {% for c in orders %}
         <tr>
             <td>{{c.id}}</td>
         <td>
-        <a href="">{{ c.user.username }}</a></td>
-        <td>{{c.user.first_name}} {{c.user.last_name}} </td>
-        <td>{{ c.user.email}}</td>
-        <td>{{ c.mobile}}</td>
-        <td>{{ c.dob}}</td>
-        <td><ul>{% for item in c.user.groups.all %}<li>{{ item}}</li>{% endfor %}</ul></td>
+        <a href="">{{ c.date_added }}</a></td>
+        <td>{{c.customer}} </td>
+        <td>{{ c.order}}</td>
+        <td>{{ c.address}}</td>
+        <td>{{ c.city}}</td>
+        <td>{{ c.state}}</td>
         <td><a class="btn btn-danger" href="{% url 'user-delete' c.id  %}">Delete</a></td>
         <td><a class="btn btn-success" href="{% url 'user-update' c.id  %}">Update</a></td>
         </tr>
         {% endfor %}
   </tbody>
   </table>
-    <h1 class="font1">Our customers:</h1>
-    <table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">User ID</th>
-      <th scope="col"><a class="btn btn-secondary" href="">Username</a></th>
-        <th scope="col"><a class="btn btn-secondary" href="">Name</a></th>
-      <th scope="col"><a class="btn btn-secondary" href="">Email</a></th>
-        <th scope="col"><a class="btn btn-secondary" href="">Phone</a></th>
-        <th scope="col"><a class="btn btn-secondary" href="">Date of Birth</a></th>
-    </tr>
-  </thead>
-  <tbody>
 
-        {% for c in customer %}
-        <tr>
-            <td>{{c.id}}</td>
-        <td>
-        <a href="">{{ c.user.username }}</a></td>
-        <td>{{c.user.first_name}} {{c.user.last_name}} </td>
-        <td>{{ c.user.email}}</td>
-        <td>{{ c.mobile}}</td>
-        <td>{{ c.dob}}</td>
-        <td><ul>{% for item in c.user.groups.all %}<li>{{ item}}</li>{% endfor %}</ul></td>
-        <td><a class="btn btn-danger" href="{% url 'user-delete' c.id  %}">Delete</a></td>
-        <td><a class="btn btn-success" href="{% url 'user-update' c.id  %}">Update</a></td>
-        </tr>
-        {% endfor %}
-  </tbody>
-  </table>
 {% endblock %}
