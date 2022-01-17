@@ -18,13 +18,15 @@ class AdminUserUpdateForm(UserChangeForm):
 		model = User
 		fields = ['username', 'email', 'groups']
 
-	mobile = CharField(max_length=30)
 	dob = DateField()
+	mobile = CharField(max_length=30)
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
+
 		for visible in self.visible_fields():
 			visible.field.widget.attrs['class'] = 'form-control'
+
 
 	@atomic
 	def save(self, commit=True):
