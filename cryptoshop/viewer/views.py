@@ -4,9 +4,9 @@ import requests
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
-from .forms import FaqForm, AdvertForm, ArticleForm
-from .models import Article, Advert, FAQ
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from .forms import FaqForm, AdvertForm
+from .models import Advert, FAQ
 
 API_KEY = 'ff230ce135704fccb7a61b36132c35f9'
 

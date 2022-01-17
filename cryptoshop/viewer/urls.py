@@ -1,8 +1,7 @@
 from django.urls import path
 
 from .views import FaqView, FaqCreateView, FaqUpdateView, FaqDeleteView, FaqDetailView, \
-    AdvertView, AdvertCreateView, AdvertDetailView, AdvertUpdateView, AdvertDeleteView, news, ArticleCreateView, \
-    ArticleDetailView, ArticleUpdateView, ArticleDeleteView
+    AdvertView, AdvertCreateView, AdvertDetailView, AdvertUpdateView, AdvertDeleteView, news
 
 
 
