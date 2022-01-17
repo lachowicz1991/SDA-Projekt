@@ -1,11 +1,10 @@
 {% extends "base.html" %}
-
 {% block title %}
 Chat
-
 {% endblock %}
 
 {% block content %}
+{% if perms.chat.add_message %}
 <section class="section">
             <div class="container">
                 <div class="columns is-multiline">
@@ -60,4 +59,6 @@ Chat
 <!--                    window.location.replace('chat/' + roomName + '/?username=' + {{request.user}});-->
             };
         </script>
+{% endif %}
+
 {% endblock %}

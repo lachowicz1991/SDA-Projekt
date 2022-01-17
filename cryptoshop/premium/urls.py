@@ -3,7 +3,7 @@ from django.urls import path
 from .views import CryptoView, TechnicalAnalysisView, BreakingNewsView, PredictionsView, InvestmentStrategiesView, PredictionsCreateView, \
     PredictionsDeleteView, PredictionsUpdateView, PredictionsDetailView, BreakingNewsDeleteView, BreakingNewsDetailView, \
     BreakingNewsUpdateView, BreakingNewsCreateView, InvestmentStrategiesUpdateView, InvestmentStrategiesDetailView, \
-    InvestmentStrategiesCreateView, InvestmentStrategiesDeleteView
+    InvestmentStrategiesCreateView, InvestmentStrategiesDeleteView, PremiumView
 
 urlpatterns = [
     path('crypto', CryptoView.as_view(), name='cryptomarket'),
@@ -26,4 +26,5 @@ urlpatterns = [
          name='investment_strategies-update'),
     path('investment-strategies/<slug:slug>/delete', InvestmentStrategiesDeleteView.as_view(),
          name='investment_strategies-delete'),
+    path('premium', PremiumView.as_view(), name='premium'),
 ]

@@ -6,8 +6,8 @@
     <h3> {{ news.short_description }}</h3>
     <p> {{ news.content }} </p>
 
-
+{% if request.user|has_group:"Content manager" %}
 <a class="btn btn-secondary" href="{% url 'breaking_news-update' news.slug %}">Update Breaking News</a>
 <a class="btn btn-danger" href="{% url 'breaking_news-delete' news.slug%}">Delete Breaking News</a>
-
+{% endif %}
 {% endblock %}

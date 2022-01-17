@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load auth_extras %}
 {% block content %}
+{% if request.user|has_group:"user_premium" %}
 <div class="row">
 	{% for news in breakings_news %}
 		<div class="col-lg-4">
@@ -15,8 +17,9 @@
 	{% endfor %}
 
 	</div>
-
+{% endif %}
 <br>
+{% if request.user|has_group:"Content manager" %}
 	<a class="btn btn-secondary" href="{% url 'breaking_news-create' %}">Create new breaking news!</a>
-
+{% endif %}
 {% endblock  %}

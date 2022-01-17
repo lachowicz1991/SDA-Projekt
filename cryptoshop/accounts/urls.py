@@ -15,7 +15,6 @@ urlpatterns = [
 	path('staffcontrol', staff_list_view, name='staffcontrol'),
 	path('<int:pk>/delete', UserDeleteView.as_view(), name='user-delete'),
 	path('<int:id>/update', customer_update, name='user-update'),
-	path('', include('viewer.urls')),
 	path('reset_password/',
 		 PasswordResetView.as_view(template_name="password_reset.html"),
 		 name="reset_password"),

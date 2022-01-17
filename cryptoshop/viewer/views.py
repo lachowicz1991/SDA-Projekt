@@ -4,15 +4,13 @@ import requests
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-
-from .forms import FaqForm, AdvertForm
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from .forms import FaqForm, AdvertForm, ArticleForm
 from .models import Article, Advert, FAQ
 
 API_KEY = 'ff230ce135704fccb7a61b36132c35f9'
 
 LOGGER = getLogger()
-
-
 
 
 def news(request):
@@ -70,30 +68,33 @@ class FaqDetailView(DetailView):
     context_object_name = 'faq'
 
 
-class FaqCreateView(CreateView):
+class FaqCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'faq_form.html'
     form_class = FaqForm
     success_url = reverse_lazy('faq')
+    permission_required = 'viewer.add_faq'
 
 
-class FaqUpdateView(UpdateView):
+class FaqUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'faq_form.html'
     model = FAQ
     form_class = FaqForm
     success_url = reverse_lazy('faq')
+    permission_required = 'viewer.change_faq'
 
     def form_invalid(self, form):
         LOGGER.warning('User provided wrong data.')
         return super().form_invalid(form)
 
 
-class FaqDeleteView(DeleteView):
+class FaqDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'faq_delete.html'
     model = FAQ
     success_url = reverse_lazy('faq')
-
+    permission_required = 'viewer.delete_faq'
 
 # # View for Home / Emil
+
 
 class AdvertView(ListView):
     template_name = 'advert.html'
@@ -110,24 +111,28 @@ class AdvertDetailView(DetailView):
     context_object_name = 'advert'
 
 
-class AdvertCreateView(CreateView):
+class AdvertCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'advert_form.html'
     form_class = AdvertForm
     success_url = reverse_lazy('advert')
+    permission_required = 'viewer.add_advert'
 
 
-class AdvertUpdateView(UpdateView):
+class AdvertUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'advert_form.html'
     model = Advert
     form_class = AdvertForm
     success_url = reverse_lazy('advert')
+    permission_required = 'viewer.change_advert'
 
     def form_invalid(self, form):
         LOGGER.warning('User provided wrong data.')
         return super().form_invalid(form)
 
 
-class AdvertDeleteView(DeleteView):
+class AdvertDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'advert_delete.html'
     model = Advert
     success_url = reverse_lazy('advert')
+    permission_required = 'viewer.delete_advert'
+

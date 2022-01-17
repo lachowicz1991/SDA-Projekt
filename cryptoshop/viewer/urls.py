@@ -1,7 +1,9 @@
 from django.urls import path
 
 from .views import FaqView, FaqCreateView, FaqUpdateView, FaqDeleteView, FaqDetailView, \
-    AdvertView, AdvertCreateView, AdvertDetailView, AdvertUpdateView, AdvertDeleteView, news
+    AdvertView, AdvertCreateView, AdvertDetailView, AdvertUpdateView, AdvertDeleteView, news, ArticleCreateView, \
+    ArticleDetailView, ArticleUpdateView, ArticleDeleteView
+
 
 
 urlpatterns = [
@@ -16,4 +18,5 @@ urlpatterns = [
     path('faq/<slug:slug>', FaqDetailView.as_view(), name='faq-detail'),
     path('faq/<slug:slug>/edit', FaqUpdateView.as_view(), name='faq-update'),
     path('faq/<slug:slug>/delete', FaqDeleteView.as_view(), name='faq-delete'),
+
 ]

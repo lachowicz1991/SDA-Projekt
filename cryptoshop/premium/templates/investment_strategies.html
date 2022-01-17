@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load auth_extras %}
 {% block content %}
+{% if request.user|has_group:"user_premium" %}
 <div class="row">
 	{% for strategy in strategies %}
 		<div class="col-lg-4">
 			<a href="{% url 'investment_strategies-detail' strategy.slug %}"><img class="thumbnail" src="{{ strategy.image_url_safe }}"></a>
 			<div class="box-element strategy">
-				<h6><strong>{{strategy.title}}</strong></h6>
+				<h6><strong>{{ strategy.title }}</strong></h6>
 				<hr>
 				<a href="{% url 'investment_strategies-detail' strategy.slug %}"><strong>{{ strategy.short_description}} </strong></h4></a>
 
@@ -15,8 +17,9 @@
 	{% endfor %}
 
 	</div>
-
+{% endif %}
 <br>
+{% if request.user|has_group:"Content manager" %}
 	<a class="btn btn-secondary" href="{% url 'investment_strategies-create' %}">Create new Strategy!</a>
-
+{% endif %}
 {% endblock  %}
