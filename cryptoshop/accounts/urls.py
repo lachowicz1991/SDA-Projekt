@@ -16,6 +16,8 @@ urlpatterns = [
 	path('advert-control', AdvertControlView.as_view(), name='advert-control'),
 	path('customercontrol', customer_list_view, name='customercontrol'),
 	path('staffcontrol', staff_list_view, name='staffcontrol'),
+	path('groupcontrol', group_list_view, name='groupcontrol'),
+	path('<int:pk>/groupupdate', GroupUpdateView.as_view(), name='groupdate'),
 	path('<int:pk>/delete', UserDeleteView.as_view(), name='user-delete'),
 	path('<int:pk>/update', ProfileUpdateView.as_view(), name='user-update'),
 	path('', include('viewer.urls')),

@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-    <h1>{{ breaking_news.title }}</h1>
-    <p><h3>Content:</h3> {{ breaking_news.content }} </p>
+    <h1>{{ news.title }}</h1>
+    <img class="thumbnail" src="{{ news.image_url_safe }}">
+    <h3> {{ news.short_description }}</h3>
+    <p> {{ news.content }} </p>
 
 
-<a class="btn btn-secondary" href="{% url 'breaking-news-update' breaking_news.slug %}">Update Breaking News</a>
-<a class="btn btn-danger" href="{% url 'breaking-news-delete' breaking_news.slug%}">Delete Breaking News</a>
+<a class="btn btn-secondary" href="{% url 'breaking_news-update' news.slug %}">Update Breaking News</a>
+<a class="btn btn-danger" href="{% url 'breaking_news-delete' news.slug%}">Delete Breaking News</a>
 
 {% endblock %}

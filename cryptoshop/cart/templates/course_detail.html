@@ -8,11 +8,8 @@
 
 <h3>{{ product_detail.short_description }}</h3>
 
-
 <button  data-product="{{ product_detail.id }}" data-action="add" class="btn btn-outline-secondary add-btn
 				update-cart">Add to Cart</button>
-
-
 <br>
 <br>
 <a class="btn btn-success" href="{% url 'product-update' product_detail.id  %}">Update product</a>

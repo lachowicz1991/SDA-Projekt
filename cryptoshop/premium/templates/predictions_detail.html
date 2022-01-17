@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-    <h1>{{ predictions.title }}</h1>
-    <p> {{ predictions.content }} </p>
+    <h1>{{ prediction.title }}</h1>
+    <img class="thumbnail" src="{{ prediction.image_url_safe }}">
+    <h3> {{ prediction.short_description }}</h3>
+    <p>{{ prediction.content }} </p>
 
-
-<a class="btn btn-secondary" href="{% url 'prediction-update' predictions.slug %}">Update Prediction</a>
-<a class="btn btn-danger" href="{% url 'prediction-delete' predictions.slug%}">Delete Prediction</a>
+<a class="btn btn-secondary" href="{% url 'prediction-update' prediction.slug %}">Update Prediction</a>
+<a class="btn btn-danger" href="{% url 'prediction-delete' prediction.slug%}">Delete Prediction</a>
 
 {% endblock %}

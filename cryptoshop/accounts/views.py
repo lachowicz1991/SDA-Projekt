@@ -53,6 +53,17 @@ def staff_list_view(request):
     context = {'staff': staff}
     return render(request, 'staffcontrol.html', context)
 
+def group_list_view(request):
+    group = Group.objects.all()
+    context = {'group': group}
+    return render(request, 'groupscontrol.html', context)
+
+class GroupUpdateView(UpdateView):
+    template_name = 'forms.html'
+    model = Group
+    fields = '__all__'
+    success_url = reverse_lazy('groupcontrol')
+
 class OrderListView(ListView):
     template_name = 'orderscontrol.html'
     model = ShippingAddress

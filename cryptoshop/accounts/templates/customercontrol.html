@@ -26,7 +26,7 @@
         <td>{{ c.dob}}</td>
         <td><ul>{% for item in c.user.groups.all %}<li>{{ item}}</li>{% endfor %}</ul></td>
         <td><a class="btn btn-danger" href="{% url 'user-delete' c.id  %}">Delete</a></td>
-        <td><a class="btn btn-success" href="{% url 'user-update' c.id  %}">Update</a></td>
+        <td><a class="btn btn-success" href="{% url 'user-update' c.pk  %}">Update</a></td>
         </tr>
         {% endfor %}
   </tbody>
@@ -56,7 +56,7 @@
         <td>{{ c.dob}}</td>
         <td><ul>{% for item in c.user.groups.all %}<li>{{ item}}</li>{% endfor %}</ul></td>
         <td><a class="btn btn-danger" href="{% url 'user-delete' c.id  %}">Delete</a></td>
-        <td><a class="btn btn-success" href="{% url 'user-update' c.id  %}">Update</a></td>
+        <td><a class="btn btn-success" href="{% url 'user-update' c.pk  %}">Update</a></td>
         </tr>
         {% endfor %}
   </tbody>
