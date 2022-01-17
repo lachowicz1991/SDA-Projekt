@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Adverts
+
 {% endblock %}
 {% block content %}
 
 <h2></h2>
+
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
@@ -19,14 +20,14 @@ Adverts
             {% if forloop.first %}
                 <div class="carousel-item active  ">
             {% else %}
-                  <div class="carousel-item  ">
-
+                    <div class="carousel-item  ">
             {% endif %}
                <img class="d-block w-100 h-50" class="h-50 d-inline-block" src="{{ advert.image_url_safe}}">
                        <div class="carousel-caption d-none d-md-block">
                            <h5>{{advert.title}}</h5>
                             <p>{{advert.content}}</p>
             </div>
+
             </div>
         {% endfor %}
      </div>
@@ -38,13 +39,19 @@ Adverts
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
+
   </div>
+
 
 <br>
 
     <a class="btn btn-primary" href="{% url 'advert-create' %}">New Advert</a>
 
 </br>
+
+
+    </div>
+
 
 
 {% endblock %}
