@@ -10,8 +10,9 @@
 			<div class="box-element strategy">
 				<h6><strong>{{ strategy.title }}</strong></h6>
 				<hr>
-				<a href="{% url 'investment_strategies-detail' strategy.slug %}"><strong>{{ strategy.short_description}} </strong></h4></a>
-
+				{{ strategy.short_description}}
+				</br>
+				<a class="btn btn-outline-success" href="{% url 'investment_strategies-detail' strategy.slug%}">View</a>
 			</div>
 		</div>
 	{% endfor %}

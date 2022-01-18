@@ -12,9 +12,8 @@ from .models import InvestmentStrategies, Predictions, BreakingNews
 LOGGER = getLogger()
 
 
-class CryptoView(PermissionRequiredMixin, TemplateView):
+class CryptoView(TemplateView):
     template_name = "cryptomarket.html"
-    permission_required = 'premium.view_predictions'
 
 
 class TechnicalAnalysisView(PermissionRequiredMixin, TemplateView):

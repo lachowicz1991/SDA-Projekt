@@ -4,6 +4,8 @@ Chat
 {% endblock %}
 
 {% block content %}
+<p><strong>Porozmawiaj z naszym licencjonowanych ekspertem na chatcie online, zadawaj pytania, analizuj wykresy
+    </strong></p>
 {% if perms.chat.add_message %}
 <section class="section">
             <div class="container">
@@ -21,25 +23,28 @@ Chat
 
                     <div class="column is-4 is-offset-4">
                         <div class="field">
-                            <label>Room name</label>
+                            <label>Room name *</label>
 
                             <div class="control">
-                                <input class="input" type="text" placeholder="Room name" id="room-name-input">
+                                <input class="input" type="text" placeholder="Room name..." id="room-name-input">
                             </div>
                         </div>
-
+                        </br>
                         <div class="field">
                             <label>Username</label>
 
                             <div class="control">
 <!--                                <input class="input" type="text" placeholder="Username" id="username-input">-->
-                                <div class="user" id="username-input">{{request.user}}</div>
+                                <div class="user" id="username-input"><b>{{request.user}}</b></div>
                             </div>
                         </div>
                         </br>
+                        <i>* nazwę pokoju dostałeś w wiadomości powitalnej</i>
+                        </br>
+                        </br>
                         <div class="field">
                             <div class="control">
-                                <a class="btn btn-secondary" id="room-name-submit">Entry Room</a>
+                                <a class="btn btn-success" id="room-name-submit">Entry Room</a>
                             </div>
                         </div>
                     </div>

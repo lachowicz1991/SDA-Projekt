@@ -10,8 +10,9 @@
 			<div class="box-element news">
 				<h6><strong>{{ news.title}}</strong></h6>
 				<hr>
-				<a href="{% url 'breaking_news-detail' news.slug %}"><strong>${{ news.short_description}}</strong></h4></a>
-
+				{{ news.short_description }}
+		</br>
+				<a class="btn btn-outline-success" href="{% url 'breaking_news-detail' news.slug%}">View</a>
 			</div>
 		</div>
 	{% endfor %}

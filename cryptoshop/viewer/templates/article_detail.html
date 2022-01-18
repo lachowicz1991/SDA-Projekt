@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load auth_extras %}
 {% block content %}
 <div class="row">
 <div class="col-lg-4">
@@ -8,7 +8,7 @@
 <h3>{{ article.content }}</h3>
 <br>
 <br>
-{% if perms.viewer.change_advert %}
+{% if request.user|has_group:"staff" %}
 <a class="btn btn-secondary" href="{% url 'article-update' article.slug %}">Update Article</a>
 <a class="btn btn-danger" href="{% url 'article-delete' article.slug %}">Delete Article</a>
 {% endif %}
