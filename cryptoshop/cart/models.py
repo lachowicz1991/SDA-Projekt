@@ -74,7 +74,7 @@ class OrderItem(Model):
 
 class ShippingAddress(Model):
 	customer = ForeignKey(Customer, on_delete=SET_NULL, null=True)
-	order = ForeignKey(Order, on_delete=SET_NULL, null=True)
+	order = ForeignKey(Order, on_delete=SET_NULL, null=True, related_name="ordersa")
 	address = CharField(max_length=200, null=False)
 	city = CharField(max_length=200, null=False)
 	state = CharField(max_length=200, null=False)
