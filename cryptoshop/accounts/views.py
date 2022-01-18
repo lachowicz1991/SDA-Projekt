@@ -3,7 +3,7 @@ from django.contrib.auth.views import LoginView, reverse_lazy, LogoutView, Passw
 from django.views.generic import ListView, UpdateView, DetailView, TemplateView, CreateView, DeleteView
 from .forms import AdminUserUpdateForm, CreateUserForm, CreateCustomerForm
 from .models import Customer
-from cart.models import ShippingAddress
+from cart.models import ShippingAddress, OrderItem
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -73,7 +73,7 @@ class GroupUpdateView(UpdateView):
 
 class OrderListView(ListView):
     template_name = 'orderscontrol.html'
-    model = ShippingAddress
+    model = OrderItem
     context_object_name = 'orders'
 
 
@@ -104,3 +104,5 @@ class UserDeleteView(DeleteView):
     model = Customer
     success_url = reverse_lazy('controls')
 
+class ContactView(TemplateView):
+    template_name = "contact.html"
