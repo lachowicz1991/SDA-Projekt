@@ -1,6 +1,6 @@
 from django.shortcuts import render
-
 from .models import Message
+
 
 
 def index(request):
@@ -12,3 +12,5 @@ def room(request, room_name):
     messages = Message.objects.filter(room=room_name)[0:25]
 
     return render(request, 'chat/room.html', {'room_name': room_name, 'username': username, 'messages': messages})
+
+# @login_required(redirect_field_name= 'accounts/login/')

@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% load auth_extras %}
 {% block content %}
+{% if request.user|has_group:"Content manager" %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.non_field_errors }}
@@ -25,4 +27,5 @@
         </div>
         <input type="submit" value="Submit prediction" class="btn btn-primary">
     </form>
+{% endif %}
 {% endblock content %}

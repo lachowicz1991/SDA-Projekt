@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+{% load auth_extras %}
 {% load static %}
 {% block content %}
+{% if perms.premium.view_predictions %}
 <div class="row">
 	{% for prediction in predictions %}
 		<div class="col-lg-4">
@@ -15,8 +17,10 @@
 	{% endfor %}
 
 	</div>
-
+{% endif %}
 <br>
+{% if request.user|has_group:"staff" %}
 	<a class="btn btn-secondary" href="{% url 'prediction-create' %}">Create new prediction!</a>
+{% endif %}
 
 {% endblock  %}

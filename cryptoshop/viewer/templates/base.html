@@ -64,17 +64,54 @@ font-family: 'Lobster', cursive;
                 Premium
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% if perms.premium.view_predictions %}
                 <a class="dropdown-item" href="{% url 'cryptomarket' %}">Crypto Market</a>
                     <div class="dropdown-divider"></div>
+                    {% else %}
+                    <a class="dropdown-item" href="{% url 'store' %}">Crypto Market</a>
+                    <div class="dropdown-divider"></div>
+                    {% endif %}
+
+                    {% if perms.premium.view_predictions %}
                 <a class="dropdown-item" href="{% url 'prediction' %}">Predictions</a>
                     <div class="dropdown-divider"></div>
+                    {% else %}
+                    <a class="dropdown-item" href="{% url 'store' %}">Predictions</a>
+                    <div class="dropdown-divider"></div>
+                    {% endif %}
+
+                    {% if perms.premium.view_investment_strategies %}
                 <a class="dropdown-item" href="{% url 'investment_strategies' %}">Investment Strategies</a>
                     <div class="dropdown-divider"></div>
+                    {% else %}
+                    <a class="dropdown-item" href="{% url 'store' %}">Investment Strategies</a>
+                    <div class="dropdown-divider"></div>
+                    {% endif %}
+
+                    {% if perms.premium.view_breaking_news %}
                 <a class="dropdown-item" href="{% url 'breaking_news' %}">Breaking News</a>
                     <div class="dropdown-divider"></div>
+                    {% else %}
+                    <a class="dropdown-item" href="{% url 'store' %}">Breaking News</a>
+                    <div class="dropdown-divider"></div>
+                    {% endif %}
+
+                    {% if perms.premium.view_predictions %}
                 <a class="dropdown-item" href="{% url 'technnical_analysis' %}">Technical Analysis</a>
                     <div class="dropdown-divider"></div>
+                    {% else %}
+                    <a class="dropdown-item" href="{% url 'store' %}">Technical Analysis</a>
+                    <div class="dropdown-divider"></div>
+                    {% endif %}
+
+                    {% if perms.chat.add_message %}
                 <a class="dropdown-item" href="{% url 'chat' %}">Chat with Expert</a>
+                    <div class="dropdown-divider"></div>
+                    {% else %}
+                    <a class="dropdown-item" href="{% url 'store' %}">Chat with Expert</a>
+                    <div class="dropdown-divider"></div>
+                    {% endif %}
+
                 </div>
                 </li>
 
@@ -113,6 +150,7 @@ font-family: 'Lobster', cursive;
                    <a class="dropdown-item text-right" href="{% url 'controls' %}">Controls</a>
                     {% else %}
                 <a href="{% url 'login' %}" class="dropdown-item text-right">Login</a>
+                    <a href="{% url 'signup' %}" class="dropdown-item text-right">SignUp</a>
                     {% endif %}
             </div>
             </div>
