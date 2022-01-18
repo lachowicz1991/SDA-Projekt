@@ -11,6 +11,7 @@ class Article(Model):
     image = ImageField(upload_to='images', blank=True, null=True)
     slug = SlugField(max_length=128, unique=True)
 
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
