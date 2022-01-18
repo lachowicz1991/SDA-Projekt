@@ -1,4 +1,4 @@
-from .views import CustomLoginView,  CustomPasswordChangeView, OrderListView, Controls, UserDeleteView, customer_registration,\
+from .views import CustomLoginView,  CustomPasswordChangeView, OrderItemListView, OrderListView, Controls, UserDeleteView, customer_registration,\
 	staff_list_view, customer_list_view, ProfileUpdateView, ContactView
 from django.contrib.auth.views import LogoutView, PasswordResetCompleteView,PasswordResetDoneView,\
 	PasswordResetConfirmView, PasswordResetView
@@ -14,7 +14,8 @@ urlpatterns = [
 	path('controls', Controls.as_view(), name='controls'),
 	path('contact', ContactView.as_view(), name='contact'),
 	path('signup', customer_registration, name='signup'),
-	path('orders', OrderListView.as_view(), name='orders'),
+	path('<int:pk>/orders', OrderItemListView.as_view(), name='orders'),
+	path('order-list', OrderListView.as_view(), name='order_list'),
 	path('advert-control', AdvertControlView.as_view(), name='advert-control'),
 	path('article-control', ArticleControlView.as_view(), name='article-control'),
 	path('faq-control', FaqControlView.as_view(), name='faq-control'),

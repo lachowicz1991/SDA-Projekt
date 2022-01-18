@@ -1,47 +1,27 @@
 {% extends "base.html" %}
-
 {% block content %}
-    <h1 class="font1">Our orders</h1>
+    <h1 class="font1">Orders</h1>
     <table class="table table-dark">
   <thead>
     <tr>
       <th scope="col">Order ID</th>
-
         <th scope="col"><a class="btn btn-secondary" href="">Customer</a></th>
-      <th scope="col"><a class="btn btn-secondary" href="">Order</a></th>
-        <th scope="col"><a class="btn btn-secondary" href="">Address</a></th>
-        <th scope="col"><a class="btn btn-secondary" href="">City</a></th>
-        <th scope="col"><a class="btn btn-secondary" href="">State</a></th>
-        <th scope="col"><a class="btn btn-secondary" href="">Date</a></th>
+        <th scope="col"><a class="btn btn-secondary" href="">Date of order</a></th>
     </tr>
   </thead>
   <tbody>
 
-        {% for c in orders %}
+        {% for order in orders %}
         <tr>
-            <td>{{c.id}}</td>
-        <td>
-
-        <td>{{c.order.customer}}</td>
-            <td>{{c.product}}</td>
-        <td><ul>{% for o in c.order.ordersa.all %}<li>{{ o.address }}</li>{% endfor %}</ul></td>
-        <td><ul>{% for o in c.order.ordersa.all %}<li>{{ o.city }}</li>{% endfor %}</ul></td>
-        <td>{{ c.date_added }}</td>
-        <td>{{ c.date_added }}</td>
-        <td><a class="btn btn-danger" href="{% url 'user-delete' c.id  %}">Delete</a></td>
-        <td><a class="btn btn-success" href="{% url 'user-update' c.id  %}">Update</a></td>
+        <td>{{order.id}}</td>
+        <td>{{order.customer}}</td>
+        <td>{{order.date_ordered}}</td>
+        <td><a class="btn btn-primary" href="{% url 'orders' order.pk %}">Detail</a></td>
+        <td><a class="btn btn-danger" href="">Delete</a></td>
+        <td><a class="btn btn-success" href="">Update</a></td>
         </tr>
         {% endfor %}
-
-
   </tbody>
   </table>
-<p>
-{% for order in orders %}
-    {% for order_item in order.orderitem_set.all %}
-    {{ order_item.product.all }}
 
-{% endfor %}
-{% endfor %}
-    </p>
 {% endblock %}
