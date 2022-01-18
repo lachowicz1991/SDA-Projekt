@@ -3,6 +3,7 @@ from django.utils.text import slugify
 
 
 # Create your models here.
+
 #Model Prediction(Premium)
 class Predictions(Model):
     title = CharField(max_length=128)
@@ -47,6 +48,7 @@ class InvestmentStrategies(Model):
         except:
             url = ''
         return url
+
 
 #Model Breaking News(Premium)
 class BreakingNews(Model):

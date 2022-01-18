@@ -60,14 +60,8 @@ font-family: 'Lobster', cursive;
                 Premium
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% if perms.premium.view_predictions %}
                 <a class="dropdown-item" href="{% url 'cryptomarket' %}">Crypto Market</a>
                     <div class="dropdown-divider"></div>
-                    {% else %}
-                    <a class="dropdown-item" href="{% url 'store' %}">Crypto Market</a>
-                    <div class="dropdown-divider"></div>
-                    {% endif %}
-
                     {% if perms.premium.view_predictions %}
                 <a class="dropdown-item" href="{% url 'prediction' %}">Predictions</a>
                     <div class="dropdown-divider"></div>

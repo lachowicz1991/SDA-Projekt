@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load auth_extras %}
 {% block content %}
-{% if request.user|has_group:"Content manager" %}
+{% if request.user|has_group:"staff" %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.non_field_errors }}

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load auth_extras %}
 {% block content %}
 <div class="row">
 <div class="col-lg-4">
@@ -12,9 +12,10 @@
 				update-cart">Add to Cart</button>
 <br>
 <br>
+{% if request.user|has_group:"staff" %}
 <a class="btn btn-success" href="{% url 'product-update' product_detail.id  %}">Update product</a>
 
 <br><br>
 <a class="btn btn-danger" href="{% url 'product-delete' product_detail.id  %}">Delete product</a>
-
+{% endif %}
 {% endblock %}

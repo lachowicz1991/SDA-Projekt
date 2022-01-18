@@ -28,7 +28,6 @@ class AdvertForm(ModelForm):
             visible.field.widget.attrs['class'] = 'form-control'
 
 
-
 class ArticleForm(ModelForm):
 
     class Meta:

@@ -3,10 +3,10 @@
 {% load auth_extras %}
 {% block content %}
     <h1>{{ article.title }}</h1>
-    <p><h3>Answer:</h3> {{ faq.answer }} </p>
+    <p>{{ article.content }} </p>
     <img class="row-image" src="{{ article_detail.image_url_safe}}">
 
-{% if request.user|has_group:"Content manager" %}
+{% if request.user|has_group:"staff" %}
 <a class="btn btn-secondary" href="{% url 'article-update' article.slug %}">Update Article</a>
 <a class="btn btn-danger" href="{% url 'article-delete' article.slug %}">Delete Article</a>
 {% endif %}

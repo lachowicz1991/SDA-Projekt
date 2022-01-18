@@ -124,7 +124,6 @@ class ProductCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'cart.add_product'
 
 
-
 class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'product_form.html'
     model = Product

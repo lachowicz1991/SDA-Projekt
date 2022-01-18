@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db.models import Q
 from .decorators import unauthenticated_user
+from django.db.transaction import atomic
 # Create your views here.
 
 def customer_registration(request):
@@ -33,12 +34,18 @@ def customer_registration(request):
 class ProfileUpdateView(UpdateView):
     template_name = 'forms.html'
     form_class = AdminUserUpdateForm
-    model = User
+    model = Customer
     success_url = reverse_lazy('controls')
 
     def get_object(self, queryset=None):
         return Customer.objects.get(pk=self.kwargs['pk']).user
-        # Not working
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['dob'] = Customer.objects.get(pk=self.kwargs['pk']).dob
+        initial['mobile'] = Customer.objects.get(pk=self.kwargs['pk']).mobile
+        return initial
+
 
 
 def customer_list_view(request):
@@ -96,4 +103,3 @@ class UserDeleteView(DeleteView):
     template_name = 'delete_form.html'
     model = Customer
     success_url = reverse_lazy('controls')
-

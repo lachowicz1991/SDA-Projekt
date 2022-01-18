@@ -157,6 +157,13 @@ class AdvertDeleteView(PermissionRequiredMixin, DeleteView):
 
 
 # View for Home / Emil (Article)
+class ArticleControlView(ListView):
+    template_name = 'article-control.html'
+    model = Article
+    context_object_name = 'articles'
+
+    def get_queryset(self):
+        return Article.objects.all()
 
 class ArticleView(ListView):
     template_name = 'article.html'
