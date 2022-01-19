@@ -12,7 +12,11 @@
       {% if request.user|has_group:"admin" %}
         <th scope="col"><a class="btn btn-secondary" href="{%url 'staffcontrol' %}">Manage Staff</a></th>
       {% endif %}
-    <th scope="col"><a class="btn btn-secondary" href="{%url 'order_list' %}">Manage Orders</a></th>
+      {% if request.user|has_group:"staff" %}
+    <th scope="col"><a class="btn btn-secondary" href="{%url 'orders' %}">Manage Orders</a></th>
+      {% elif request.user|has_group:"admin"%}
+      <th scope="col"><a class="btn btn-secondary" href="{%url 'orders' %}">Manage Orders</a></th>
+      {% endif %}
       {% if perms.viewer.add_advert %}
       <th scope="col"><a class="btn btn-secondary" href="{%url 'advert-control' %}">Manage Adverts</a></th>
       {% endif %}
