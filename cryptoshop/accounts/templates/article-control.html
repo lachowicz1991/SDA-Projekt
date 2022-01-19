@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="lobster">Our articles:</h1>
+    <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Article ID</th>
+      <th scope="col"><a class="btn btn-secondary" href="">Image</a></th>
+        <th scope="col"><a class="btn btn-secondary" href="">Title</a></th>
+    </tr>
+  </thead>
+  <tbody>
+
+        {% for c in articles %}
+        <tr>
+            <td>{{c.id}}</td>
+        <td>
+        <a href=""><img class="thumbnail" src="{{ c.image_url_safe }}"></a></td>
+        <td>{{c.title}} </td>
+        <td><a class="btn btn-primary" href="{% url 'article-detail' c.slug %}">Details</a></td>
+        <td><a class="btn btn-danger" href="{% url 'article-delete' c.slug %}">Delete</a></td>
+        <td><a class="btn btn-success" href="{% url 'article-update' c.slug %}">Update</a></td>
+        </tr>
+        {% endfor %}
+  </tbody>
+        <a class="btn btn-success" href="{% url 'article-create' %}">Create new article</a>
+  </table>
+
+{% endblock  %}

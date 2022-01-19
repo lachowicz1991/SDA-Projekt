@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="font1">Client's order</h1>
+    <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Order ID</th>
+        <th scope="col"><a class="btn btn-secondary" href="">Product</a></th>
+        <th scope="col"><a class="btn btn-secondary" href="">Quantity</a></th>
+        <th scope="col"><a class="btn btn-secondary" href="">Date of order</a></th>
+    </tr>
+  </thead>
+  <tbody>
+
+        {% for order in order_items %}
+        <tr>
+        <td>{{order.id}}</td>
+        <td>{{order.product}}</td>
+        <td>{{order.quantity}}</td>
+        <td>{{order.date_added}}</td>
+        <td><a class="btn btn-danger" href="">Delete</a></td>
+        </tr>
+        {% endfor %}
+  </tbody>
+  </table>
+
+{% endblock %}

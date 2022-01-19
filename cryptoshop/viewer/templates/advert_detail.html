@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+<div class="col-lg-4">
+    <img class="thumbnail" src="{{ advert.image_url_safe }}"></div></div>
+<h1 class="lobster">{{ advert.title }} </h1>
+<h3>{{ advert.content }}</h3>
+<br>
+<br>
+{% if perms.viewer.change_advert %}
+<a class="btn btn-secondary" href="{% url 'advert-update' advert.slug %}">Update Advert</a>
+<a class="btn btn-danger" href="{% url 'advert-delete' advert.slug %}">Delete Advert</a>
+{% endif %}
+{% endblock %}

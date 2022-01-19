@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+{% load static %}
+{% block content %}
+{% if perms.premium.view_breaking_news %}
+<div class="row">
+	{% for news in breakings_news %}
+		<div class="col-lg-4">
+			<a href="{% url 'breaking_news-detail' news.slug %}"><img class="thumbnail" src="{{ news.image_url_safe }}"></a>
+			<div class="box-element news">
+				<h6 class="lobster"><strong>{{ news.title}}</strong></h6>
+				<hr>
+				{{ news.short_description }}
+		</br>
+				<a class="btn btn-outline-success" href="{% url 'breaking_news-detail' news.slug%}">View</a>
+			</div>
+		</div>
+	{% endfor %}
+
+	</div>
+{% endif %}
+<br>
+{% if request.user|has_group:"staff" %}
+	<a class="btn btn-secondary" href="{% url 'breaking_news-create' %}">Create new breaking news!</a>
+{% endif %}
+{% endblock  %}

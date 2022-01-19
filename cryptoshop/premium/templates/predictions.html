@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+{% load static %}
+{% block content %}
+{% if perms.premium.view_predictions %}
+<div class="row">
+	{% for prediction in predictions %}
+		<div class="col-lg-4">
+			<a href="{% url 'prediction-detail' prediction.slug %}"><img class="thumbnail" src="{{ prediction.image_url_safe }}"></a>
+			<div class="box-element prediction">
+				<h6 class="lobster"><strong>{{ prediction.title}}</strong></h6>
+				{{ prediction.short_description }}
+				</br>
+				<a class="btn btn-outline-success" href="{% url 'prediction-detail' prediction.slug%}">View</a>
+
+			</div>
+		</div>
+	{% endfor %}
+
+	</div>
+{% endif %}
+<br>
+{% if request.user|has_group:"staff" %}
+	<a class="btn btn-secondary" href="{% url 'prediction-create' %}">Create new prediction!</a>
+{% endif %}
+
+{% endblock  %}

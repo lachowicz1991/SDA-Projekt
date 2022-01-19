@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+{% load static %}
+{% block content %}
+{% if perms.premium.investment_strategies %}
+<div class="row">
+	{% for strategy in strategies %}
+		<div class="col-lg-4">
+			<a href="{% url 'investment_strategies-detail' strategy.slug %}"><img class="thumbnail" src="{{ strategy.image_url_safe }}"></a>
+			<div class="box-element strategy">
+				<h6 class="lobster"><strong>{{ strategy.title }}</strong></h6>
+				<hr>
+				{{ strategy.short_description}}
+				</br>
+				<a class="btn btn-outline-success" href="{% url 'investment_strategies-detail' strategy.slug%}">View</a>
+			</div>
+		</div>
+	{% endfor %}
+
+	</div>
+{% endif %}
+<br>
+{% if request.user|has_group:"staff" %}
+	<a class="btn btn-secondary" href="{% url 'investment_strategies-create' %}">Create new Strategy!</a>
+{% endif %}
+{% endblock  %}

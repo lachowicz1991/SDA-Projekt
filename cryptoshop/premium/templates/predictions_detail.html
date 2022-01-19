@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load auth_extras %}
+{% block content %}
+    <h1 class="lobster">{{ prediction.title }}</h1>
+    <img class="thumbnail" src="{{ prediction.image_url_safe}}">
+    <h5 class="lobster">> {{ prediction.short_description }}</h5>
+    <p>{{ prediction.content }} </p>
+
+{% if request.user|has_group:"staff" %}
+<a class="btn btn-secondary" href="{% url 'prediction-update' prediction.slug %}">Update Prediction</a>
+<a class="btn btn-danger" href="{% url 'prediction-delete' prediction.slug%}">Delete Prediction</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+{% load static %}
+{% block content %}
+<!--Template for courses (e-store), currently with no functionality. I will sort this out soon. Matt-->
+
+<div class="row">
+	{% for product in products %}
+		<div class="col-lg-4">
+			<a href="{% url 'product_detail' product.id %}"><img class="thumbnail" src="{{ product.image_url_safe }}"></a>
+			<div class="box-element product">
+				<h6><strong>{{product.name}}</strong></h6>
+				<hr>
+
+				<button  data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn
+				update-cart">Add to Cart</button>
+				<a class="btn btn-outline-success" href="{% url 'product_detail' product.id %}">View</a>
+				<h4 style="display: inline-block; float: right"><strong>${{product.price|floatformat:2}}</strong></h4>
+
+			</div>
+		</div>
+	{% endfor %}
+
+	</div>
+
+<br>
+{% if request.user|has_group:"staff" %}
+	<a class="btn btn-secondary" href="{% url 'product-create' %}?s=year">Create new product!</a>
+{% endif %}
+{% endblock  %}
