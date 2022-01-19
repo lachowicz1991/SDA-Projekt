@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 
-    <h1>{{ news.title }}</h1>
+    <h1 class="lobster">{{ news.title }}</h1>
     <img class="thumbnail" src="{{ news.image_url_safe }}">
     <h3> {{ news.short_description }}</h3>
     <p> {{ news.content }} </p>

@@ -8,7 +8,7 @@
 		<div class="col-lg-4">
 			<a href="{% url 'investment_strategies-detail' strategy.slug %}"><img class="thumbnail" src="{{ strategy.image_url_safe }}"></a>
 			<div class="box-element strategy">
-				<h6><strong>{{ strategy.title }}</strong></h6>
+				<h6 class="lobster"><strong>{{ strategy.title }}</strong></h6>
 				<hr>
 				{{ strategy.short_description}}
 				</br>

@@ -8,7 +8,7 @@
 		<div class="col-lg-4">
 			<a href="{% url 'breaking_news-detail' news.slug %}"><img class="thumbnail" src="{{ news.image_url_safe }}"></a>
 			<div class="box-element news">
-				<h6><strong>{{ news.title}}</strong></h6>
+				<h6 class="lobster"><strong>{{ news.title}}</strong></h6>
 				<hr>
 				{{ news.short_description }}
 		</br>
