@@ -3,7 +3,7 @@ from logging import getLogger
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-
+from cart.utils import cartData
 from .forms import PredictionsForm, BreakingNewsForm, InvestmentStrategiesForm
 from .models import InvestmentStrategies, Predictions, BreakingNews
 
@@ -15,11 +15,21 @@ LOGGER = getLogger()
 class CryptoView(TemplateView):
     template_name = "cryptomarket.html"
 
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(CryptoView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
 
 class TechnicalAnalysisView(PermissionRequiredMixin, TemplateView):
     template_name = "analyst_tech.html"
     permission_required = 'premium.view_predictions'
 
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(TechnicalAnalysisView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
 
 class PredictionsView(PermissionRequiredMixin, ListView):
     template_name = "predictions.html"
@@ -30,6 +40,12 @@ class PredictionsView(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         return Predictions.objects.all()
 
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(PredictionsView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
+
 
 class PredictionsDetailView(PermissionRequiredMixin, DetailView):
     model = Predictions
@@ -37,6 +53,11 @@ class PredictionsDetailView(PermissionRequiredMixin, DetailView):
     context_object_name = 'prediction'
     permission_required = 'premium.view_predictions'
 
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(PredictionsDetailView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
 
 class PredictionsCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'predictions_form.html'
@@ -73,12 +94,24 @@ class BreakingNewsView(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         return BreakingNews.objects.all()
 
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(BreakingNewsView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
+
 
 class BreakingNewsDetailView(PermissionRequiredMixin, DetailView):
     model = BreakingNews
     template_name = 'breaking_news_detail.html'
     context_object_name = 'news'
     permission_required = 'premium.view_breaking_news'
+
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(BreakingNewsDetailView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
 
 
 class BreakingNewsCreateView(PermissionRequiredMixin, CreateView):
@@ -116,12 +149,24 @@ class InvestmentStrategiesView(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         return InvestmentStrategies.objects.all()
 
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(InvestmentStrategiesView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
+
 
 class InvestmentStrategiesDetailView(PermissionRequiredMixin, DetailView):
     model = InvestmentStrategies
     template_name = "investment_strategies_detail.html"
     context_object_name = 'strategy'
     permission_required = 'premium.view_investment_strategies'
+
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(InvestmentStrategiesDetailView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
 
 
 class InvestmentStrategiesCreateView(PermissionRequiredMixin, CreateView):

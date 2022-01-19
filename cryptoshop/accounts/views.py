@@ -6,10 +6,8 @@ from .models import Customer
 from cart.models import ShippingAddress, OrderItem, Order
 from django.contrib.auth.models import Group
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django.db.models import Q
-from .decorators import unauthenticated_user
-from django.db.transaction import atomic
+from cart.utils import cartData
+
 # Create your views here.
 
 def customer_registration(request):
@@ -110,3 +108,9 @@ class UserDeleteView(DeleteView):
 
 class ContactView(TemplateView):
     template_name = "contact.html"
+
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(ContactView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
