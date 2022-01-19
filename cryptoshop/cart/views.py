@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, TemplateView
-
+from .utils import cartData
 from .forms import ProductForm
 from .models import *
 
@@ -18,17 +18,15 @@ class CourseDetailView(DetailView):
     template_name = 'course_detail.html'
     context_object_name = 'product_detail'
 
-def store(request):
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(CourseDetailView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
 
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartitems = order.get_cart_items
-    else:
-        items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
-        cartitems = order['get_cart_items']
+def store(request):
+    data = cartData(request)
+    cartitems = data['cartitems']
 
     products = Product.objects.all()
     context = {'products': products, 'cartitems': cartitems}
@@ -36,29 +34,21 @@ def store(request):
 
 
 def cart(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartitems = order.get_cart_items
-    else:
-        items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
-        cartitems = order['get_cart_items']
+    data = cartData(request)
+    items = data['items']
+    order = data['order']
+    cartitems = data['cartitems']
+
     context = {'items': items, 'order': order, 'cartitems': cartitems}
     return render(request, 'cart.html', context, )
 
 
 def checkout(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartitems = order.get_cart_items
-    else:
-        items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
-        cartitems = order['get_cart_items']
+    data = cartData(request)
+    items = data['items']
+    order = data['order']
+    cartitems = data['cartitems']
+
     context = {'items': items, 'order': order, 'cartitems': cartitems}
     return render(request, 'checkout.html', context)
 
