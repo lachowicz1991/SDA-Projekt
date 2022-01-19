@@ -101,3 +101,13 @@ class ContactView(TemplateView):
         context = super(ContactView, self).get_context_data(**kwargs)
         context['cartitems'] = data['cartitems']
         return context
+
+class OrderDeleteView(DeleteView):
+    template_name = 'delete_form.html'
+    model = Order
+    success_url = reverse_lazy('order_list')
+
+class OrderItemDeleteView(DeleteView):
+    template_name = 'delete_form.html'
+    model = OrderItem
+    success_url = reverse_lazy('order_list')
