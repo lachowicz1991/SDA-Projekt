@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth.mixins import PermissionRequiredMixin
-
+from cart.utils import cartData
 from .forms import FaqForm, AdvertForm, ArticleForm
 from .models import Article, Advert, FAQ
 
@@ -39,9 +39,12 @@ def news(request):
         data = response.json()
         articles = data['articles']
         print(articles)
+    data = cartData(request)
+    cartitems = data['cartitems']
 
     context = {
-        'articles': articles
+        'articles': articles,
+        'cartitems': cartitems,
     }
 
     return render(request, 'news.html', context)
@@ -63,7 +66,9 @@ class FaqView(ListView):
         return FAQ.objects.all()
 
     def get_context_data(self, **kwargs):
+        data = cartData(self.request)
         context = super(FaqView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
         context['adverts'] = Advert.objects.all()
         return context
 
@@ -119,7 +124,9 @@ class AdvertView(ListView):
         return Advert.objects.all()
 
     def get_context_data(self, **kwargs):
+        data = cartData(self.request)
         context = super(AdvertView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
         context['articles'] = Article.objects.all()
         return context
 

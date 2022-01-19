@@ -26,7 +26,7 @@
  		}
  		if (user == 'AnonymousUser'){
  			userFormData.name = form.name.value
- 			userFormData.email = form.name.value
+ 			userFormData.email = form.email.value
  		}
 
 

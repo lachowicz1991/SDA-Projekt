@@ -3,13 +3,11 @@ from django.contrib.auth.views import LoginView, reverse_lazy, LogoutView, Passw
 from django.views.generic import ListView, UpdateView, DetailView, TemplateView, CreateView, DeleteView
 from .forms import AdminUserUpdateForm, CreateUserForm, CreateCustomerForm
 from .models import Customer
-from cart.models import ShippingAddress, OrderItem
+from cart.models import ShippingAddress, OrderItem, Order
 from django.contrib.auth.models import Group
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django.db.models import Q
-from .decorators import unauthenticated_user
-from django.db.transaction import atomic
+from cart.utils import cartData
+
 # Create your views here.
 
 def customer_registration(request):
@@ -60,16 +58,20 @@ def staff_list_view(request):
     context = {'staff': staff}
     return render(request, 'staffcontrol.html', context)
 
-def group_list_view(request):
-    group = Group.objects.all()
-    context = {'group': group}
-    return render(request, 'groupscontrol.html', context)
+class OrderItemListView(ListView):
+    template_name = 'orderdetail.html'
+    model = OrderItem
+    context_object_name = 'order_items'
 
-class GroupUpdateView(UpdateView):
-    template_name = 'forms.html'
-    model = Group
-    fields = '__all__'
-    success_url = reverse_lazy('groupcontrol')
+    def get_queryset(self):
+        return OrderItem.objects.filter(order__id=self.kwargs.get('pk'))
+
+
+class OrderListView(ListView):
+    model = Order
+    template_name = 'orderscontrol.html'
+    context_object_name = 'orders'
+
 
 class OrderListView(ListView):
     template_name = 'orderscontrol.html'
@@ -106,3 +108,9 @@ class UserDeleteView(DeleteView):
 
 class ContactView(TemplateView):
     template_name = "contact.html"
+
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(ContactView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
