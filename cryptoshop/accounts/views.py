@@ -72,19 +72,6 @@ class OrderListView(ListView):
     template_name = 'orderscontrol.html'
     context_object_name = 'orders'
 
-
-class OrderListView(ListView):
-    template_name = 'orderscontrol.html'
-    model = OrderItem
-    context_object_name = 'orders'
-
-
-class OrderDetailView(DetailView):
-    model = ShippingAddress
-    template_name = 'order_detail.html'
-    context_object_name = 'order'
-
-
 class CustomLoginView(LoginView):
     template_name = 'forms.html'
 
