@@ -86,10 +86,10 @@ def processOrder(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         total = data['form']['total']
-        # order.transaction_id = transaction_id
-        # order_id = Order.objects.get(id=this_object_id)
+        order.transaction_id = transaction_id
+        # # Needs order_id for filter :(
         # premium = OrderItem.objects.filter(order__id=order_id).filter(product__name='premium').exist()
-
+        # # Under construction
         # if premium:
         #     group = Group.objects.get(name='customer')
         #     customer.groups.remove(group)
