@@ -4,7 +4,6 @@
 
 {% block content %}
 <img src="static/faq.png" class="img-fluid" alt="Responsive image">
-
  <div class="row">
      <div class="col-sm-8">
          </br>
@@ -13,7 +12,7 @@
             <div class="card">
                 {% if request.user|has_group:"staff" %}
                 <div class="card-header" id="heading{{ faq.id }}">
-                    <div class="btn btn" id="question" data-toggle="collapse" data-target="#collapse{{ faq.id }}" aria-expanded="false"
+                    <div class="btn btn " id="question" data-toggle="collapse" data-target="#collapse{{ faq.id }}" aria-expanded="false"
                         aria-controls="collapseOne">
                         {{ faq.question }}   <a href ="{% url 'faq-detail' faq.slug %}">     &#x2190;</a>
                     </div>
@@ -26,7 +25,7 @@
                     </div>
                 </div>
                 {% endif %}
-                <div id="collapse{{ faq.id }}" class="collapse " aria-labelledby="heading{{ faq.id }}" data-parent="#faq">
+                <div id="collapse{{ faq.id }}" class="collapse" aria-labelledby="heading{{ faq.id }}" data-parent="#faq">
                     <div class="card-body" id="answer">
                 <ul>
                     {{ faq.answer }}
