@@ -81,7 +81,7 @@ class CustomLoginView(LoginView):
 
 class CustomPasswordChangeView(PasswordChangeView):
     template_name = 'forms.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('advert')
 
 
 class Controls(TemplateView):
@@ -111,3 +111,4 @@ class OrderItemDeleteView(DeleteView):
     template_name = 'delete_form.html'
     model = OrderItem
     success_url = reverse_lazy('order_list')
+

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
-
+{% load auth_extras %}
+{% load static %}
 {% block content %}
+{% if request.user|has_group:"admin" or request.user|has_group:"staff" or request.user|has_group:"premium"%}
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
@@ -18,5 +20,8 @@
 }
   </script>
 </div>
+	{% else %}
+	<h1 class="lobster">Please buy premium access!</h1>
+{% endif %}
 <!-- TradingView Widget END -->
 {% endblock %}

@@ -2,12 +2,14 @@
 {% load auth_extras %}
 {% load static %}
 {% block content %}
-
+{% if request.user|has_group:"admin" or request.user|has_group:"staff" or request.user|has_group:"premium"%}
     <h1 class="lobster">{{ news.title }}</h1>
     <img class="thumbnail" src="{{ news.image_url_safe }}">
     <h3> {{ news.short_description }}</h3>
     <p> {{ news.content }} </p>
-
+	{% else %}
+	<h1 class="lobster">Please buy premium access!</h1>
+{% endif %}
 {% if request.user|has_group:"staff" %}
 <a class="btn btn-secondary" href="{% url 'breaking_news-update' news.slug %}">Update Breaking News</a>
 <a class="btn btn-danger" href="{% url 'breaking_news-delete' news.slug%}">Delete Breaking News</a>

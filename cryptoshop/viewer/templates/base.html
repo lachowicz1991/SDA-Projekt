@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load auth_extras %}
 <html {% if LANGAUGE_CODE %}lang="{{LANGUAGE_CODE }}" {% endif %}>
 <head>
     <meta charset="utf-8">
@@ -74,7 +74,7 @@ font-family: 'Lobster', cursive;
                     <div class="dropdown-divider"></div>
                     {% endif %}
 
-                    {% if perms.premium.view_investment_strategies %}
+                {% if request.user|has_group:"admin" or request.user|has_group:"staff" or request.user|has_group:"premium"%}
                 <a class="dropdown-item" href="{% url 'investment_strategies' %}">Investment Strategies</a>
                     <div class="dropdown-divider"></div>
                     {% else %}
@@ -82,7 +82,7 @@ font-family: 'Lobster', cursive;
                     <div class="dropdown-divider"></div>
                     {% endif %}
 
-                    {% if perms.premium.view_breaking_news %}
+                {% if request.user|has_group:"admin" or request.user|has_group:"staff" or request.user|has_group:"premium"%}
                 <a class="dropdown-item" href="{% url 'breaking_news' %}">Breaking News</a>
                     <div class="dropdown-divider"></div>
                     {% else %}
@@ -90,7 +90,7 @@ font-family: 'Lobster', cursive;
                     <div class="dropdown-divider"></div>
                     {% endif %}
 
-                    {% if perms.premium.view_predictions %}
+                {% if request.user|has_group:"admin" or request.user|has_group:"staff" or request.user|has_group:"premium"%}
                 <a class="dropdown-item" href="{% url 'technnical_analysis' %}">Technical Analysis</a>
                     <div class="dropdown-divider"></div>
                     {% else %}
@@ -98,7 +98,7 @@ font-family: 'Lobster', cursive;
                     <div class="dropdown-divider"></div>
                     {% endif %}
 
-                    {% if perms.chat.add_message %}
+                {% if request.user|has_group:"admin" or request.user|has_group:"staff" or request.user|has_group:"premium"%}
                 <a class="dropdown-item" href="{% url 'chat' %}">Chat with Expert</a>
                     <div class="dropdown-divider"></div>
                     {% else %}
