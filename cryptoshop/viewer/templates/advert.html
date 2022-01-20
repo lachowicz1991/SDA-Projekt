@@ -25,7 +25,6 @@
                <img class="d-block w-100 h-50" class="h-50 d-inline-block" src="{{ advert.image_url_safe}}">
                        <div class="carousel-caption d-none d-md-block">
                            <h5 class="lobster"  ><a style="color:white" href="{% url 'advert-detail' advert.slug %}">{{advert.title}}</a></h5>
-                           <p style="color:white" ><a style="color:white" href="{% url 'advert-detail' advert.slug %}">{{advert.content}}</a></p>
             </div>
 
             </div>
@@ -42,7 +41,6 @@
   </a>
 
   </div>
-
         <div class="row">
 	{% for article in articles %}
             {% if forloop.counter < 4 %}

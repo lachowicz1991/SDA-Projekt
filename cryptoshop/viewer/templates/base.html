@@ -66,7 +66,8 @@ font-family: 'Lobster', cursive;
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'cryptomarket' %}">Crypto Market</a>
                     <div class="dropdown-divider"></div>
-                    {% if perms.premium.view_predictions %}
+
+                    {% if request.user|has_group:"admin" or request.user|has_group:"staff" or request.user|has_group:"premium"%}
                 <a class="dropdown-item" href="{% url 'prediction' %}">Predictions</a>
                     <div class="dropdown-divider"></div>
                     {% else %}
