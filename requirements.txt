@@ -2,5 +2,4 @@ Django~=4.0
 channels~=3.0.4
 asgiref~=3.4.1
 requests~=2.26.0
-
 pillow~=8.4.0
