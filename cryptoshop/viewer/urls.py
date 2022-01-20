@@ -21,5 +21,4 @@ urlpatterns = [
     path('faq/<slug:slug>', FaqDetailView.as_view(), name='faq-detail'),
     path('faq/<slug:slug>/edit', FaqUpdateView.as_view(), name='faq-update'),
     path('faq/<slug:slug>/delete', FaqDeleteView.as_view(), name='faq-delete'),
-
 ]
