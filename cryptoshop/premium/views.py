@@ -21,9 +21,8 @@ class CryptoView(TemplateView):
         context['cartitems'] = data['cartitems']
         return context
 
-class TechnicalAnalysisView(PermissionRequiredMixin, TemplateView):
+class TechnicalAnalysisView(TemplateView):
     template_name = "analyst_tech.html"
-    permission_required = 'premium.view_predictions'
 
     def get_context_data(self, **kwargs):
         data = cartData(self.request)
@@ -31,11 +30,10 @@ class TechnicalAnalysisView(PermissionRequiredMixin, TemplateView):
         context['cartitems'] = data['cartitems']
         return context
 
-class PredictionsView(PermissionRequiredMixin, ListView):
+class PredictionsView( ListView):
     template_name = "predictions.html"
     model = Predictions
     context_object_name = 'predictions'
-    permission_required = 'premium.view_predictions'
 
     def get_queryset(self):
         return Predictions.objects.all()
@@ -47,11 +45,10 @@ class PredictionsView(PermissionRequiredMixin, ListView):
         return context
 
 
-class PredictionsDetailView(PermissionRequiredMixin, DetailView):
+class PredictionsDetailView(DetailView):
     model = Predictions
     template_name = 'predictions_detail.html'
     context_object_name = 'prediction'
-    permission_required = 'premium.view_predictions'
 
     def get_context_data(self, **kwargs):
         data = cartData(self.request)
@@ -59,37 +56,34 @@ class PredictionsDetailView(PermissionRequiredMixin, DetailView):
         context['cartitems'] = data['cartitems']
         return context
 
-class PredictionsCreateView(PermissionRequiredMixin, CreateView):
+class PredictionsCreateView(CreateView):
     template_name = 'predictions_form.html'
     form_class = PredictionsForm
     success_url = reverse_lazy('prediction')
-    permission_required = 'premium.add_predictions'
 
 
-class PredictionsUpdateView(PermissionRequiredMixin, UpdateView):
+class PredictionsUpdateView(UpdateView):
     template_name = 'predictions_form.html'
     model = Predictions
     form_class = PredictionsForm
     success_url = reverse_lazy('prediction')
-    permission_required = 'premium.change_predictions'
 
     def form_invalid(self, form):
         LOGGER.warning('User provided wrong data.')
         return super().form_invalid(form)
 
 
-class PredictionsDeleteView(PermissionRequiredMixin, DeleteView):
+class PredictionsDeleteView(DeleteView):
     template_name = "predictions_delete.html"
     model = Predictions
     success_url = reverse_lazy('prediction')
-    permission_required = 'premium.delete_predictions'
 
 
-class BreakingNewsView(PermissionRequiredMixin, ListView):
+class BreakingNewsView(ListView):
     template_name = "breaking_news.html"
     model = BreakingNews
     context_object_name = 'breakings_news'
-    permission_required = 'premium.view_breaking_news'
+
 
     def get_queryset(self):
         return BreakingNews.objects.all()
@@ -101,11 +95,10 @@ class BreakingNewsView(PermissionRequiredMixin, ListView):
         return context
 
 
-class BreakingNewsDetailView(PermissionRequiredMixin, DetailView):
+class BreakingNewsDetailView(DetailView):
     model = BreakingNews
     template_name = 'breaking_news_detail.html'
     context_object_name = 'news'
-    permission_required = 'premium.view_breaking_news'
 
     def get_context_data(self, **kwargs):
         data = cartData(self.request)
@@ -114,37 +107,34 @@ class BreakingNewsDetailView(PermissionRequiredMixin, DetailView):
         return context
 
 
-class BreakingNewsCreateView(PermissionRequiredMixin, CreateView):
+class BreakingNewsCreateView(CreateView):
     template_name = 'breaking_news_form.html'
     form_class = BreakingNewsForm
     success_url = reverse_lazy('breaking_news')
-    permission_required = 'premium.add_breaking_news'
 
 
-class BreakingNewsUpdateView(PermissionRequiredMixin, UpdateView):
+class BreakingNewsUpdateView(UpdateView):
     template_name = 'breaking_news_form.html'
     model = BreakingNews
     form_class = BreakingNewsForm
     success_url = reverse_lazy('breaking_news')
-    permission_required = 'premium.change_breaking_news'
+
 
     def form_invalid(self, form):
         LOGGER.warning('User provided wrong data.')
         return super().form_invalid(form)
 
 
-class BreakingNewsDeleteView(PermissionRequiredMixin, DeleteView):
+class BreakingNewsDeleteView(DeleteView):
     template_name = "breaking_news_delete.html"
     model = BreakingNews
     success_url = reverse_lazy('breaking_news')
-    permission_required = 'premium.delete_breaking_news'
 
 
-class InvestmentStrategiesView(PermissionRequiredMixin, ListView):
+class InvestmentStrategiesView(ListView):
     template_name = "investment_strategies.html"
     model = InvestmentStrategies
     context_object_name = 'strategies'
-    permission_required = 'premium.view_investment_strategies'
 
     def get_queryset(self):
         return InvestmentStrategies.objects.all()
@@ -156,11 +146,10 @@ class InvestmentStrategiesView(PermissionRequiredMixin, ListView):
         return context
 
 
-class InvestmentStrategiesDetailView(PermissionRequiredMixin, DetailView):
+class InvestmentStrategiesDetailView(DetailView):
     model = InvestmentStrategies
     template_name = "investment_strategies_detail.html"
     context_object_name = 'strategy'
-    permission_required = 'premium.view_investment_strategies'
 
     def get_context_data(self, **kwargs):
         data = cartData(self.request)
@@ -169,27 +158,24 @@ class InvestmentStrategiesDetailView(PermissionRequiredMixin, DetailView):
         return context
 
 
-class InvestmentStrategiesCreateView(PermissionRequiredMixin, CreateView):
+class InvestmentStrategiesCreateView( CreateView):
     template_name = "investment_strategies_form.html"
     form_class = InvestmentStrategiesForm
     success_url = reverse_lazy('investment_strategies')
-    permission_required = 'premium.add_investment_strategies'
 
 
-class InvestmentStrategiesUpdateView(PermissionRequiredMixin, UpdateView):
+class InvestmentStrategiesUpdateView(UpdateView):
     template_name = "investment_strategies_form.html"
     model = InvestmentStrategies
     form_class = InvestmentStrategiesForm
     success_url = reverse_lazy('investment_strategies')
-    permission_required = 'premium.change_investment_strategies'
 
     def form_invalid(self, form):
         LOGGER.warning('User provided wrong data.')
         return super().form_invalid(form)
 
 
-class InvestmentStrategiesDeleteView(PermissionRequiredMixin, DeleteView):
+class InvestmentStrategiesDeleteView(DeleteView):
     template_name = "investment_strategies_delete.html"
     model = InvestmentStrategies
     success_url = reverse_lazy('investment_strategies')
-    permission_required = 'premium.delete_investment_strategies'

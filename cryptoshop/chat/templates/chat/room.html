@@ -1,12 +1,13 @@
 {% extends "base.html" %}
-
+{% load auth_extras %}
+{% load static %}
 {% block title %}
 Room
 
 {% endblock %}
 
 {% block content %}
-{% if perms.chat_add_message %}
+{% if request.user|has_group:"admin" or request.user|has_group:"staff" or request.user|has_group:"premium"%}
 <section class="section">
             <div class="container">
                 <div class="columns is-multiline">

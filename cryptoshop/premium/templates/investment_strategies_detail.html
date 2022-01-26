@@ -2,12 +2,15 @@
 {% load auth_extras %}
 {% load static %}
 {% block content %}
+{% if request.user|has_group:"admin" or request.user|has_group:"staff" or request.user|has_group:"premium"%}
     <h1 class="lobster">{{ strategy.title }}</h1>
     <img class="thumbnail" src="{{ strategy.image_url_safe }}">
     <h5 class="lobster">>{{ strategy.short_description }}</h5>
     <p> {{ strategy.content }} </p>
-
-{% if request.user|has_group:"staff" %}
+	{% else %}
+	<h1 class="lobster">Please buy premium access!</h1>
+{% endif %}
+    {% if request.user|has_group:"admin" or request.user|has_group:"staff"%}
 <a class="btn btn-secondary" href="{% url 'investment_strategies-update' strategy.slug %}">Update Strategy</a>
 <a class="btn btn-danger" href="{% url 'investment_strategies-delete' strategy.slug %}">Delete Strategy</a>
 {% endif %}

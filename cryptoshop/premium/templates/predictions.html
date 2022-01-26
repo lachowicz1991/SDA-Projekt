@@ -2,7 +2,7 @@
 {% load auth_extras %}
 {% load static %}
 {% block content %}
-{% if perms.premium.view_predictions %}
+{% if request.user|has_group:"admin" or request.user|has_group:"staff" or request.user|has_group:"premium"%}
 <div class="row">
 	{% for prediction in predictions %}
 		<div class="col-lg-4">
@@ -18,9 +18,11 @@
 	{% endfor %}
 
 	</div>
+	{% else %}
+	<h1 class="lobster">Please buy premium access!</h1>
 {% endif %}
 <br>
-{% if request.user|has_group:"staff" %}
+    {% if request.user|has_group:"admin" or request.user|has_group:"staff"%}
 	<a class="btn btn-secondary" href="{% url 'prediction-create' %}">Create new prediction!</a>
 {% endif %}
 
