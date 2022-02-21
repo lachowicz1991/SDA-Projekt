@@ -58,7 +58,7 @@ class FaqControlView(ListView):
 
 
 class FaqView(ListView):
-    template_name = 'faq.html'
+    template_name = 'faq_new.html'
     model = FAQ
     context_object_name = 'faqy'
 

@@ -2,7 +2,7 @@
 {% load auth_extras %}
 {% load static %}
 {% block content %}
-{% if perms.premium.view_breaking_news %}
+{% if request.user|has_group:"admin" or request.user|has_group:"staff" or request.user|has_group:"premium"%}
 <div class="row">
 	{% for news in breakings_news %}
 		<div class="col-lg-4">
@@ -15,12 +15,15 @@
 				<a class="btn btn-outline-success" href="{% url 'breaking_news-detail' news.slug%}">View</a>
 			</div>
 		</div>
+
 	{% endfor %}
 
 	</div>
+	{% else %}
+	<h1 class="lobster">Please buy premium access!</h1>
 {% endif %}
 <br>
-{% if request.user|has_group:"staff" %}
+    {% if request.user|has_group:"admin" or request.user|has_group:"staff"%}
 	<a class="btn btn-secondary" href="{% url 'breaking_news-create' %}">Create new breaking news!</a>
 {% endif %}
 {% endblock  %}

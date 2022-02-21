@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load auth_extras %}
+{% load static %}
 {% block content %}
-{% if request.user|has_group:"staff" %}
+{% if request.user|has_group:"admin" or request.user|has_group:"staff" %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.non_field_errors }}
@@ -27,5 +28,7 @@
         </div>
         <input type="submit" value="Submit prediction" class="btn btn-primary">
     </form>
+{% else %}
+	<h1 class="lobster">Only Staff!</h1>
 {% endif %}
 {% endblock content %}
