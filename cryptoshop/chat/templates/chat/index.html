@@ -67,6 +67,7 @@ Chat
 <!--                    window.location.replace('chat/' + roomName + '/?username=' + {{request.user}});-->
             };
         </script>
+{% else %}
+	<h1 class="lobster">Please buy premium access!</h1>
 {% endif %}
-
 {% endblock %}

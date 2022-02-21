@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views import CryptoView, TechnicalAnalysisView, BreakingNewsView, PredictionsView, InvestmentStrategiesView, PredictionsCreateView, \
-    PredictionsDeleteView, PredictionsUpdateView, PredictionsDetailView, BreakingNewsDeleteView, BreakingNewsDetailView, \
-    BreakingNewsUpdateView, BreakingNewsCreateView, InvestmentStrategiesUpdateView, InvestmentStrategiesDetailView, \
-    InvestmentStrategiesCreateView, InvestmentStrategiesDeleteView
+from .views import CryptoView, TechnicalAnalysisView, BreakingNewsView, PredictionsView, InvestmentStrategiesView, \
+    PredictionsCreateView, PredictionsDeleteView, PredictionsUpdateView, PredictionsDetailView, BreakingNewsDeleteView, \
+    BreakingNewsDetailView, BreakingNewsUpdateView, BreakingNewsCreateView, InvestmentStrategiesUpdateView, \
+    InvestmentStrategiesDetailView, InvestmentStrategiesCreateView, InvestmentStrategiesDeleteView
 
 urlpatterns = [
     path('crypto', CryptoView.as_view(), name='cryptomarket'),

@@ -44,6 +44,11 @@ class PredictionsView( ListView):
         context['cartitems'] = data['cartitems']
         return context
 
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(TechnicalAnalysisView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
 
 class PredictionsDetailView(DetailView):
     model = Predictions
@@ -61,6 +66,11 @@ class PredictionsCreateView(CreateView):
     form_class = PredictionsForm
     success_url = reverse_lazy('prediction')
 
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(PredictionsDetailView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
 
 class PredictionsUpdateView(UpdateView):
     template_name = 'predictions_form.html'
@@ -72,6 +82,11 @@ class PredictionsUpdateView(UpdateView):
         LOGGER.warning('User provided wrong data.')
         return super().form_invalid(form)
 
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(PredictionsView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
 
 class PredictionsDeleteView(DeleteView):
     template_name = "predictions_delete.html"
@@ -84,6 +99,11 @@ class BreakingNewsView(ListView):
     model = BreakingNews
     context_object_name = 'breakings_news'
 
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(BreakingNewsDetailView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
 
     def get_queryset(self):
         return BreakingNews.objects.all()
@@ -124,6 +144,11 @@ class BreakingNewsUpdateView(UpdateView):
         LOGGER.warning('User provided wrong data.')
         return super().form_invalid(form)
 
+    def get_context_data(self, **kwargs):
+        data = cartData(self.request)
+        context = super(InvestmentStrategiesDetailView, self).get_context_data(**kwargs)
+        context['cartitems'] = data['cartitems']
+        return context
 
 class BreakingNewsDeleteView(DeleteView):
     template_name = "breaking_news_delete.html"

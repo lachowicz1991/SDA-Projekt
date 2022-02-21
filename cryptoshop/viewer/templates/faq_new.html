@@ -1,24 +1,83 @@
 {% extends 'base.html' %}
+{% load auth_extras %}
+{% load static %}
 {% block content %}
-<link rel="stylesheet" href="faq.css">
-<h2>FAQ</h2>
-{% for faq in faqy %}
-<main>
-        <h1 class="faq-heading">FAQ'S</h1>
-        <section class="faq-container">
-            <div class="faq" id="heading{{ faq.id }}">
-                <h1 class="faq-page">{{ faq.question }}</h1>
-                <div class="faq-body">
-                    <p>{{ faq.answer }}</p>
+
+<div class="row">
+
+<div class="col-sm-8 accordion_one">
+    {% for faq in faqy %}
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading" id="heading{{ faq.id }}">
+                <h5 class="panel-title">
+                    <a data-toggle="collapse" data-target="#collapse{{ faq.id }}"
+                       aria-expanded="false" aria-controls="collapseOne" class="collapsed"> {{ faq.question }} </a>
+                </h5>
+            </div>
+            <div id="collapse{{ faq.id }}" class="panel-collapse collapse" aria-expanded="false" aria-labelledby="heading{{ faq.id }}" role="tablist" style="height: 0px;">
+                <div class="panel-body">
+                    <div class="text-accordion">
+                        <p>{{ faq.answer }}</p>
+                    </div>
                 </div>
             </div>
-            <hr class="hr-line">
-            <hr class="hr-line">
-
-        </section>
-    </main>
-    <script src="faq.js"></script>
-{% endfor %}
-</br>
-<a class="btn btn-primary" href="{% url 'faq-create' %}">New Question</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+    <div class="col-sm-4 accordion_two">
+        <div id="carouselslide" class="carousel slide" data-ride="carousel">
+             <div class="carousel-inner">
+        {% for advert in adverts %}
+            {% if forloop.first %}
+                <div class="carousel-item active  ">
+            {% else %}
+                  <div class="carousel-item  ">
+            {% endif %}
+                        <div class="img" style=" float: align; width: 15em; height: 15em;">
+                   <a href="{% url 'advert-detail' advert.slug %}"><img class="thumbnail2" src="{{ advert.image_url_safe }}"></a>
+                        </div>
+                </div>
+        {% endfor %}
+                </div>
+             </div>
+            </br>
+        <div id="carouselslide1" class="carousel slide" data-ride="carousel">
+             <div class="carousel-inner">
+                 {% for advert in adverts %}
+            {% if forloop.counter == 2 %}
+                <div class="carousel-item active  ">
+            {% else %}
+                  <div class="carousel-item  ">
+            {% endif %}
+               <div class="img" style=" float: align; width: 15em; height: 15em;">
+                   <a href="{% url 'advert-detail' advert.slug %}"><img class="thumbnail2" src="{{ advert.image_url_safe }}"></a>
+               </div>
+                </div>
+        {% endfor %}
+            </div>
+             </div>
+            </br>
+        <div id="carouselslide2" class="carousel slide" data-ride="carousel">
+             <div class="carousel-inner">
+        {% for advert in adverts %}
+            {% if forloop.counter == 3 %}
+                <div class="carousel-item active  ">
+            {% else %}
+                  <div class="carousel-item  ">
+            {% endif %}
+               <div class="img" style=" float: align; width: 15em; height: 15em;">
+                   <a href="{% url 'advert-detail' advert.slug %}"><img class="thumbnail2" src="{{ advert.image_url_safe }}"></a>
+               </div>
+                </div>
+        {% endfor %}
+            </div>
+             </div>
+        </div>
+        </div>
+        </br>
+        </div>
+    </div>
+</div>
 {% endblock %}
