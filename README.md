@@ -15,7 +15,7 @@ required by the program:
 premium.fixtures.json, viewer.fixtures.json.
 
 - This is our first project of such a scale and it is 
-still underdevelopment..
+still under ongoing development..
 
 Many thanks for trying and testing our app.
 
